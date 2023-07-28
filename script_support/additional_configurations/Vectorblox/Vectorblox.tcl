@@ -12,7 +12,7 @@ sd_update_instance -sd_name {FIC_0_PERIPHERALS} -instance_name {FIC0_INITIATOR}
 sd_connect_pin_to_port -sd_name {CLOCKS_AND_RESETS} -pin_name {CLKINT_REF_CLK_50MHz:Y} -port_name {CLKINT_REF_CLK_50MHz_Y} 
 sd_connect_pin_to_port -sd_name {CLOCKS_AND_RESETS} -pin_name {INIT_MONITOR_0:DEVICE_INIT_DONE} -port_name {} 
 generate_component -component_name {CLOCKS_AND_RESETS} -recursive 0 
-sd_update_instance -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -instance_name {CLOCKS_AND_RESETS} 
+sd_update_instance -sd_name {MPFS_DISCOVERY_KIT} -instance_name {CLOCKS_AND_RESETS_0} 
 
 #connect pins 
 sd_connect_pins -sd_name {FIC_0_PERIPHERALS} -pin_names {"Vectorblox_ss_0:S_control" "FIC0_INITIATOR:AXI4mslave2" } 
@@ -20,26 +20,26 @@ sd_connect_pins -sd_name {FIC_0_PERIPHERALS} -pin_names {"Vectorblox_ss_0:aclk_c
 sd_create_scalar_port -sd_name {FIC_0_PERIPHERALS} -port_name {VBX_ACLK} -port_direction {OUT}
 sd_connect_pins -sd_name {FIC_0_PERIPHERALS} -pin_names {"VBX_ACLK" "Vectorblox_ss_0:aclk"} 
 #sd_connect_pin_to_port -sd_name {FIC_0_PERIPHERALS} -pin_name {Vectorblox_ss_0:aclk} -port_name {VBX_ACLK} 
-#sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"Vectorblox_ss_0:aclk" "ICICLE_MSS:FIC_2_ACLK"} 
+#sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"Vectorblox_ss_0:aclk" "MPFS_DISCOVERY_KIT_MSS_0:FIC_2_ACLK"} 
 sd_connect_pin_to_port -sd_name {FIC_0_PERIPHERALS} -pin_name {Vectorblox_ss_0:EXT_RST_N} -port_name {VBX_EXT_RST_N} 
-#sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"Vectorblox_ss_0:EXT_RST_N" "ICICLE_MSS:MSS_RESET_N_M2F"} 
+#sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"Vectorblox_ss_0:EXT_RST_N" "MPFS_DISCOVERY_KIT_MSS_0:MSS_RESET_N_M2F"} 
 sd_connect_pin_to_port -sd_name {FIC_0_PERIPHERALS} -pin_name {Vectorblox_ss_0:AXIM} -port_name {VBX_AXIM} 
-#sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"Vectorblox_ss_0:AXIM"     "ICICLE_MSS:FIC_2_AXI4_TARGET"} 
+#sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"Vectorblox_ss_0:AXIM"     "MPFS_DISCOVERY_KIT_MSS_0:FIC_2_AXI4_TARGET"} 
 sd_connect_pin_to_port -sd_name {FIC_0_PERIPHERALS} -pin_name {Vectorblox_ss_0:INIT_DONE} -port_name {VBX_INIT_DONE} 
-#sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"CLOCKS_AND_RESETS:DEVICE_INIT_DONE" "Vectorblox_ss_0:INIT_DONE"} 
+#sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"CLOCKS_AND_RESETS:DEVICE_INIT_DONE" "Vectorblox_ss_0:INIT_DONE"} 
 sd_connect_pin_to_port -sd_name {FIC_0_PERIPHERALS} -pin_name {Vectorblox_ss_0:REF_CLK_0} -port_name {VBX_REF_CLK} 
-# -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"CLOCKS_AND_RESETS:CLKINT_REF_CLK_50MHz_Y" "Vectorblox_ss_0:REF_CLK_0"} 
+# -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"CLOCKS_AND_RESETS:CLKINT_REF_CLK_50MHz_Y" "Vectorblox_ss_0:REF_CLK_0"} 
 generate_component -component_name {FIC_0_PERIPHERALS} -recursive 0 
-sd_update_instance -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -instance_name {FIC_0_PERIPHERALS_1} 
+sd_update_instance -sd_name {MPFS_DISCOVERY_KIT} -instance_name {FIC_0_PERIPHERALS_0} 
 
-sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"CLOCKS_AND_RESETS:CLKINT_REF_CLK_50MHz_Y" "FIC_0_PERIPHERALS_1:VBX_REF_CLK"} 
-sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"CLOCKS_AND_RESETS:DEVICE_INIT_DONE" "FIC_0_PERIPHERALS_1:VBX_INIT_DONE"}
-sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"MSS_WRAPPER_1:MSS_RESET_N_M2F" "FIC_0_PERIPHERALS_1:VBX_EXT_RST_N"} 
-sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"FIC_0_PERIPHERALS_1:VBX_ACLK" "MSS_WRAPPER_1:FIC_2_ACLK"} 
-sd_connect_pins -sd_name {MPFS_ICICLE_KIT_BASE_DESIGN} -pin_names {"FIC_0_PERIPHERALS_1:VBX_AXIM" "MSS_WRAPPER_1:FIC_2_AXI4_TARGET"} 
+sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"CLOCKS_AND_RESETS_0:CLKINT_REF_CLK_50MHz_Y" "FIC_0_PERIPHERALS_0:VBX_REF_CLK"} 
+sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"CLOCKS_AND_RESETS_0:DEVICE_INIT_DONE" "FIC_0_PERIPHERALS_0:VBX_INIT_DONE"}
+sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"MSS_WRAPPER_0:MSS_RESET_N_M2F" "FIC_0_PERIPHERALS_0:VBX_EXT_RST_N"} 
+sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"FIC_0_PERIPHERALS_0:VBX_ACLK" "MSS_WRAPPER_0:FIC_2_ACLK"} 
+sd_connect_pins -sd_name {MPFS_DISCOVERY_KIT} -pin_names {"FIC_0_PERIPHERALS_0:VBX_AXIM" "MSS_WRAPPER_0:FIC_2_AXI4_TARGET"} 
 
 #get ready for building
-generate_component -component_name {MPFS_ICICLE_KIT_BASE_DESIGN} -recursive 0 
+generate_component -component_name {MPFS_DISCOVERY_KIT} -recursive 0 
 build_design_hierarchy 
 derive_constraints_sdc
 
