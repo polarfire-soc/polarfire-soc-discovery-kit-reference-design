@@ -1,0 +1,22 @@
+# BANK0 voltage setting
+
+set_iobank -bank_name Bank0  \
+    -vcci 1.80               \
+    -fixed true             \
+    -update_iostd true
+    
+# BANK1 voltage setting - default J45 set to 1 & 2, comment out if using ALT configuration below
+
+set_iobank -bank_name Bank1  \
+    -vcci 3.30               \
+    -fixed true             \
+    -update_iostd true
+    
+# NOTE: BANK1 can also be driven by 2.5v if J45 is set to 2 & 3
+
+# BANK0 voltage setting - ALT J45 set to 2 & 3, uncomment to use
+
+#set_iobank -bank_name Bank1\
+    #-vcci 2.50               \
+    #-fixed true             \
+    #-update_iostd true

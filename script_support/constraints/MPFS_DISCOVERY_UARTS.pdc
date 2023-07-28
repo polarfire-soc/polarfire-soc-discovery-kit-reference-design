@@ -1,0 +1,10 @@
+set_io -port_name FTDI_UART_D_RXD \
+    -pin_name Y21 \
+    -fixed true \
+    -DIRECTION OUTPUT
+    
+set_io -port_name FTDI_UART_D_TXD \
+    -pin_name W21 \
+    -fixed true \
+    -DIRECTION OUTPUT
+    

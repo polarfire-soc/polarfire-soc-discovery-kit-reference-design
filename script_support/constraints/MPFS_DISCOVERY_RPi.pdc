@@ -1,0 +1,101 @@
+set_io -port_name RPI_GPIO4 \
+    -pin_name E12 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO17 \
+    -pin_name G18 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO18 \
+    -pin_name E10 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO27 \
+    -pin_name F21 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO22 \
+    -pin_name F20 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO23 \
+    -pin_name E21 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO24 \
+    -pin_name F19 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO25 \
+    -pin_name A19 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO5 \
+    -pin_name D17 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO6 \
+    -pin_name D18 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO12 \
+    -pin_name B20 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO13 \
+    -pin_name A15 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO19 \
+    -pin_name B19 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+
+set_io -port_name RPI_GPIO16 \
+    -pin_name B15 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO26 \
+    -pin_name B17 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO20 \
+    -pin_name B14 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT
+    
+set_io -port_name RPI_GPIO21 \
+    -pin_name  E13 \
+    -fixed true \
+    -io_std LVCMOS33 \
+    -DIRECTION INOUT

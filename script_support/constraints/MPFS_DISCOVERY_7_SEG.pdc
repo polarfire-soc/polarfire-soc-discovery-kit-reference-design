@@ -1,0 +1,16 @@
+set_io -port_name SPISS  \
+    -pin_name Y15                 \
+    -fixed true                   \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name SPISDO  \
+    -pin_name Y19                \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name SPISCLKO  \
+    -pin_name W16               \
+    -fixed true                 \
+    -DIRECTION OUTPUT
