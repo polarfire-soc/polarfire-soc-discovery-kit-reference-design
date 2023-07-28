@@ -224,7 +224,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
     }
 
     if {[info exists BFM_SIMULATION]} {
-        source script_support/simulation/Test_bench.tcl
+        source script_support/stimulus/Test_bench.tcl
     }
 
     if {[info exists AXI4_STREAM_DEMO]} {
