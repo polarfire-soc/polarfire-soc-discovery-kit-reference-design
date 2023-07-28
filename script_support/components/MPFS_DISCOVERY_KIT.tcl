@@ -75,8 +75,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {WE_N} -port_direction {OUT
 
 sd_create_scalar_port -sd_name ${sd_name} -port_name {COREI2C_C0_SCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {COREI2C_C0_SDA} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_1_SCL} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_1_SDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CLK} -port_direction {INOUT} -port_is_pad {1}
@@ -279,8 +277,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FTDI_UART_D_RXD" "MSS_WRAPPER_0
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FTDI_UART_D_TXD" "MSS_WRAPPER_0:MMUART_0_RXD_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_1_20_OUT" "MSS_WRAPPER_0:GPIO_1_20_OUT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_1_9_OUT" "MSS_WRAPPER_0:GPIO_1_9_OUT" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SCL" "MSS_WRAPPER_0:I2C_1_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SDA" "MSS_WRAPPER_0:I2C_1_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED1" "OR2_LED1:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED2" "OR2_LED2:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED3" "OR2_LED3:Y" }

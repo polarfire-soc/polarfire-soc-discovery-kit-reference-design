@@ -1,0 +1,27 @@
+set_io -port_name MBUS_I2C_SCL \
+    -pin_name D17 \
+    -fixed true \
+    -DIRECTION INOUT \
+    -io_std LVCMOS33 \
+    -RES_PULL UP
+    
+set_io -port_name MBUS_I2C_SDA \
+    -pin_name B19 \
+    -fixed true \
+    -DIRECTION INOUT \
+    -io_std LVCMOS33 \
+    -RES_PULL UP
+    
+set_io -port_name I2C1_SCL \
+    -pin_name D18 \
+    -fixed true \
+    -DIRECTION INOUT \
+    -io_std LVCMOS33 \
+    -RES_PULL UP
+    
+set_io -port_name I2C1_SDA \
+    -pin_name B17 \
+    -fixed true \
+    -DIRECTION INOUT \
+    -io_std LVCMOS33 \
+    -RES_PULL UP

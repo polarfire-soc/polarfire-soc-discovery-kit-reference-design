@@ -162,8 +162,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_8_IO} -port_directi
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_9_IO} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_0_SCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_0_SDA} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_1_SCL} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_1_SDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_CMD} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA0} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA1} -port_direction {INOUT} -port_is_pad {1}
@@ -755,8 +753,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SCL_BIBUF:Y" "MPFS_DISCOV
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA" "I2C_0_SDA_BIBUF:PAD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA_BIBUF:E" "MPFS_DISCOVERY_KIT_MSS_0:I2C_0_SDA_OE_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA_BIBUF:Y" "MPFS_DISCOVERY_KIT_MSS_0:I2C_0_SDA_F2M" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SCL" "MPFS_DISCOVERY_KIT_MSS_0:I2C_1_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_1_SDA" "MPFS_DISCOVERY_KIT_MSS_0:I2C_1_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_0_MDC" "MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDC_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_RXD_F2M" "MPFS_DISCOVERY_KIT_MSS_0:MMUART_0_RXD_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_TXD_M2F" "MPFS_DISCOVERY_KIT_MSS_0:MMUART_0_TXD_M2F" }

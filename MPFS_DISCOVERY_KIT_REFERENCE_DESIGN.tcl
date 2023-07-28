@@ -185,7 +185,8 @@ if { [file exists $project_dir/$project_name.prjx] } {
         -io_pdc "${constraint_path}/MPFS_DISCOVERY_mikroBUS.pdc" \
         -io_pdc "${constraint_path}/MPFS_DISCOVERY_RPi.pdc" \
         -io_pdc "${constraint_path}/MPFS_DISCOVERY_UARTS.pdc" \
-		-io_pdc "${constraint_path}/MPFS_DISCOVERY_7_SEG.pdc" 
+		-io_pdc "${constraint_path}/MPFS_DISCOVERY_7_SEG.pdc" \
+		-io_pdc "${constraint_path}/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" 
 	
 	organize_tool_files \
 		-tool {PLACEROUTE} \
@@ -225,7 +226,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
             file delete -force $local_dir/script_support/components/MSS_I2C_LOOPBACK
         }
         file mkdir $local_dir/script_support/components/MSS_I2C_LOOPBACK
-        create_config $local_dir/script_support/components/MSS/DISCOVERY_MSS.cfg $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg
+        create_config $local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cfg $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg
         update_param $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg "I2C_1 " "FABRIC"
         exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_I2C_LOOPBACK
         source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
