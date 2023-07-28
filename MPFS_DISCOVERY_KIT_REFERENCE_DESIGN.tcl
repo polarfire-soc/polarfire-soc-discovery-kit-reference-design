@@ -60,9 +60,6 @@ if {[info exists I2C_LOOPBACK]} {
 } elseif {[info exists DRI_CCC_DEMO]} {
     set project_name "MPFS_DISCOVERY_DRI_CCC_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_DRI_CCC_DEMO"
-} elseif {[info exists MICRON_QSPI]} {
-    set project_name "MPFS_DISCOVERY_MICRON_QSPI"
-    set project_dir "$local_dir/MPFS_DISCOVERY_MICRON_QSPI"
 } elseif {[info exists SMARTHLS]} {
     set project_name "Discovery_SoC"
     set project_dir "$local_dir/soc"
@@ -78,14 +75,6 @@ if {[info exists I2C_LOOPBACK]} {
 } else {
     set project_name "MPFS_DISCOVERY"
     set project_dir "$local_dir/MPFS_DISCOVERY"
-}
-
-if {[info exists MSS_LINUX]} {
-
-} elseif {[info exists MSS_BAREMETAL]} {
-
-} else {
-    set MSS_LINUX 1
 }
 
 source ./script_support/additional_configurations/functions.tcl
@@ -218,10 +207,6 @@ if { [file exists $project_dir/$project_name.prjx] } {
     #
     # // Apply additional design configurations
     #
-
-    if {[info exists MSS_BAREMETAL]} {
-	    source script_support/additional_configurations/MSS_BAREMETAL/MSS_BAREMETAL.tcl
-    }
 
     if {[info exists BFM_SIMULATION]} {
         source script_support/stimulus/Test_bench.tcl
