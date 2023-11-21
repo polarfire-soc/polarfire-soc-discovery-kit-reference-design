@@ -1,0 +1,165 @@
+# Microsemi I/O Physical Design Constraints file
+
+# User I/O Constraints file 
+
+# Version: PolarFire v2.0 12.200.0.20
+
+# Family: PolarFire , Die: MPF300T , Package: FCG1152
+
+# Date generated: Mon Nov 27 12:17:15 2017 
+
+# 
+# User Locked I/O Bank Settings
+# 
+
+# 
+# Unlocked I/O Bank Settings
+# The I/O Bank Settings can be locked by directly editing this file
+# or by making changes in the I/O Attribute Editor
+# 
+
+# 
+# User Locked I/O settings
+# 
+
+# -- Clock (50MHz) -- #
+# HSIO63PB6/CLKIN_S_12/CCC_SE_CLKIN_S_12/CCC_SE_PLL0_OUT0
+
+set_io -port_name {REF_CLK}  \
+    -pin_name R18               \
+    -fixed true                 \
+    -DIRECTION INPUT
+
+# -- User I/O -- #
+
+# Tied to SW1 on the board
+set_io -port_name {SW_1}  \
+    -pin_name T19               \
+    -fixed true                 \
+    -DIRECTION INPUT
+
+# Tied to DIP1 on the board
+set_io -port_name {SW_2}  \
+    -pin_name U17               \
+    -fixed true                 \
+    -DIRECTION INPUT
+
+# Tied to SW2 on the board
+set_io -port_name USER_RST  \
+    -pin_name U18           \
+    -fixed true             \
+    -DIRECTION INPUT
+
+
+# -- LEDs I/O --#
+
+# Tied to LED_4 on the board
+set_io -port_name {LED_1}  \
+    -pin_name T18                \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+# Tied to LED_5 on the board
+set_io -port_name {LED_2}  \
+    -pin_name V17                \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+# Tied to LED_6 on the board
+set_io -port_name {LED_3}  \
+    -pin_name U20                \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+# Tied to LED_7 on the board
+set_io -port_name {LED_4}  \
+    -pin_name U21                \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+
+# -- UART RX/TX -- #
+
+set_io -port_name RX  \
+    -pin_name Y21     \
+    -fixed true       \
+    -DIRECTION INPUT
+
+set_io -port_name TX   \
+    -pin_name W21      \
+    -fixed true        \
+    -DIRECTION OUTPUT
+
+# 
+# Unlocked I/O settings
+# The I/Os in this section are unplaced or placed but are not locked
+# the other listed attributes have been applied
+# 
+
+# Additional GPIOs IN
+
+# set_io -port_name {GPIO_IN[0]}  \
+    # -pin_name H23               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[1]}  \
+    # -pin_name D21               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[2]}  \
+    # -pin_name H24               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[3]}  \
+    # -pin_name C22               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[4]}  \
+    # -pin_name B21               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[5]}  \
+    # -pin_name G20               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[6]}  \
+    # -pin_name F24               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+# set_io -port_name {GPIO_IN[7]}  \
+    # -pin_name F25               \
+    # -fixed true                 \
+    # -DIRECTION INPUT
+
+
+# Additional GPIOs OUT
+
+# set_io -port_name {GPIO_OUT[4]}  \
+    # -pin_name C27                \
+    # -fixed true                  \
+    # -DIRECTION OUTPUT
+
+
+# set_io -port_name {GPIO_OUT[5]}  \
+    # -pin_name F23                \
+    # -fixed true                  \
+    # -DIRECTION OUTPUT
+
+
+# set_io -port_name {GPIO_OUT[6]}  \
+    # -pin_name H22                \
+    # -fixed true                  \
+    # -DIRECTION OUTPUT
+
+
+# set_io -port_name {GPIO_OUT[7]}  \
+    # -pin_name H21                \
+    # -fixed true                  \
+    # -DIRECTION OUTPUT

@@ -51,30 +51,51 @@ set constraint_path ./script_support/constraints
 if {[info exists I2C_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_I2C_LOOPBACK"
     set project_dir "$local_dir/MPFS_DISCOVERY_I2C_LOOPBACK"
+	set SOFTCPU 0
 } elseif {[info exists VECTORBLOX]} {
     set project_name "MPFS_DISCOVERY_Vectorblox"
     set project_dir "$local_dir/MPFS_DISCOVERY_Vectorblox"
+	set SOFTCPU 0
 } elseif {[info exists SPI_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_SPI_LOOPBACK"
     set project_dir "$local_dir/MPFS_DISCOVERY_SPI_LOOPBACK"
+	set SOFTCPU 0
 } elseif {[info exists DRI_CCC_DEMO]} {
     set project_name "MPFS_DISCOVERY_DRI_CCC_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_DRI_CCC_DEMO"
+	set SOFTCPU 0
 } elseif {[info exists SMARTHLS]} {
     set project_name "Discovery_SoC"
     set project_dir "$local_dir/soc"
+	set SOFTCPU 0
 } elseif {[info exists BFM_SIMULATION] && [info exists AXI4_STREAM_DEMO]} {
     set project_name "MPFS_DISCOVERY_AXI4_STREAM_DEMO_BFM"
     set project_dir "$local_dir/MPFS_DISCOVERY_AXI4_STREAM_DEMO_BFM"
+	set SOFTCPU 0
 } elseif {[info exists AXI4_STREAM_DEMO]} {
     set project_name "MPFS_DISCOVERY_AXI4_STREAM_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_AXI4_STREAM_DEMO"
+	set SOFTCPU 0
 } elseif {[info exists BFM_SIMULATION]} {
     set project_name "MPFS_DISCOVERY_BFM_SIMULATION"
     set project_dir "$local_dir/MPFS_DISCOVERY_BFM_SIMULATION"
+	set SOFTCPU 0
+} elseif {[info exists MIV_RV32_CFG1]} {
+	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG1"
+    set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG1"
+	set SOFTCPU 1
+} elseif {[info exists MIV_RV32_CFG2]} {
+	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG2"
+    set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG2"
+	set SOFTCPU 1
+} elseif {[info exists MIV_RV32_CFG3]} {
+	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG3"
+    set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG3"
+	set SOFTCPU 1
 } else {
     set project_name "MPFS_DISCOVERY"
     set project_dir "$local_dir/MPFS_DISCOVERY"
+	set SOFTCPU 0
 }
 
 source ./script_support/additional_configurations/functions.tcl
@@ -147,158 +168,308 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:DirectCore:corepwm:4.5.100} -location {www.microchip-ip.com/repositories/DirectCore} 
 		download_core -vlnv {Actel:DirectCore:COREI2C:7.2.101} -location {www.microchip-ip.com/repositories/DirectCore} 
 		download_core -vlnv {Actel:DirectCore:CoreUARTapb:5.7.100} -location {www.microchip-ip.com/repositories/DirectCore} 
+		download_core -vlnv {Actel:DirectCore:CoreTimer:2.0.103} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREJTAGDEBUG:4.0.100} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAXITOAHBL:3.6.101} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAHBTOAPB3:3.2.101} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:CoreAHBLite:6.1.101} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Microsemi:MiV:MIV_RV32:3.1.200} -location {www.microchip-ip.com/repositories/DirectCore} 
+        download_core -vlnv {Actel:SystemBuilder:MIV_ESS:2.0.200} -location {www.microchip-ip.com/repositories/SgCore}  
+		download_core -vlnv {Actel:SystemBuilder:PF_DDR3:2.4.122} -location {www.microchip-ip.com/repositories/SgCore}
+        download_core -vlnv {Actel:DirectCore:CORESPI:5.2.104} -location {www.microchip-ip.com/repositories/SgCore} 
+        download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
 	} on error err {
 		puts "Downloading cores failed, the script will continute but will fail if all of the required cores aren't present in the vault."
 	}
-
-    #
-    #  // Generate and import MSS component
-    #
-
-    if {[file isdirectory $local_dir/script_support/components/MSS]} {
-        file delete -force $local_dir/script_support/components/MSS
-    }
-    file mkdir $local_dir/script_support/components/MSS
 	
-	exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/MPFS_DISCOVERY_KIT_MSS.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS
+	if {$SOFTCPU == 0} {
+		#
+		#  // Generate and import MSS component
+		#
+		
+		if {[file isdirectory $local_dir/script_support/components/MSS]} {
+			file delete -force $local_dir/script_support/components/MSS
+		}
+		file mkdir $local_dir/script_support/components/MSS
+		
+		exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/MPFS_DISCOVERY_KIT_MSS.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS
 
-    import_mss_component -file "$local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cxz"
+		import_mss_component -file "$local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cxz"
 
-    #
-    # // Generate base design
-    #
+		#
+		# // Generate base design
+		#
 
-    cd ./script_support/
-    source MPFS_DISCOVERY_KIT_recursive.tcl
-    cd ../
-    set_root -module {MPFS_DISCOVERY_KIT::work} 
+		cd ./script_support/
+		source MPFS_DISCOVERY_KIT_recursive.tcl
+		cd ../
+		set_root -module {MPFS_DISCOVERY_KIT::work} 
 
-    #
-    # // Import I/O constraints
-    #
+		#
+		# // Import I/O constraints
+		#
 
-    import_files \
-        -convert_EDN_to_HDL 0 \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_KIT_BANK_SETTINGS.pdc" \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_MAC.pdc" \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_mikroBUS.pdc" \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_RPi.pdc" \
-        -io_pdc "${constraint_path}/MPFS_DISCOVERY_UARTS.pdc" \
-		-io_pdc "${constraint_path}/MPFS_DISCOVERY_7_SEG.pdc" \
-		-io_pdc "${constraint_path}/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" 
-	
-	organize_tool_files \
-		-tool {PLACEROUTE} \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BANK_SETTINGS.pdc" \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_mikroBUS.pdc" \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_RPi.pdc" \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_UARTS.pdc" \
-		-file "${project_dir}/constraint/io/MPFS_DISCOVERY_7_SEG.pdc" \
-		-module {MPFS_DISCOVERY_KIT::work} \
-		-input_type {constraint}        
-        
-    #
-    # // Build hierarchy before progressing
-    #
+		import_files \
+			-convert_EDN_to_HDL 0 \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_KIT_BANK_SETTINGS.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_MAC.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_mikroBUS.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_RPi.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_UARTS.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_7_SEG.pdc" \
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" 
+		
+		organize_tool_files \
+			-tool {PLACEROUTE} \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BANK_SETTINGS.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_mikroBUS.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_RPi.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_UARTS.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_7_SEG.pdc" \
+			-module {MPFS_DISCOVERY_KIT::work} \
+			-input_type {constraint}        
+			
+		#
+		# // Build hierarchy before progressing
+		#
 
-    build_design_hierarchy
+		build_design_hierarchy
 
-    #
-    # // Apply additional design configurations
-    #
+		#
+		# // Apply additional design configurations
+		#
 
-    if {[info exists BFM_SIMULATION]} {
-        source script_support/stimulus/Test_bench.tcl
-    }
+		if {[info exists BFM_SIMULATION]} {
+			source script_support/stimulus/Test_bench.tcl
+		}
 
-    if {[info exists AXI4_STREAM_DEMO]} {
-        if {[info exists BFM_SIMULATION]} {
-            source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR_BFM.tcl    
-        } else {
-            source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR.tcl    
-        }
-    }
+		if {[info exists AXI4_STREAM_DEMO]} {
+			if {[info exists BFM_SIMULATION]} {
+				source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR_BFM.tcl    
+			} else {
+				source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR.tcl    
+			}
+		}
 
-    if {[info exists I2C_LOOPBACK]} {
-        if {[file isdirectory $local_dir/script_support/components/MSS_I2C_LOOPBACK]} {
-            file delete -force $local_dir/script_support/components/MSS_I2C_LOOPBACK
-        }
-        file mkdir $local_dir/script_support/components/MSS_I2C_LOOPBACK
-        create_config $local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cfg $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg
-        update_param $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg "I2C_1 " "FABRIC"
-        exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_I2C_LOOPBACK
-        source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
-    } elseif {[info exists VECTORBLOX]} {
-        source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
-    } elseif {[info exists SPI_LOOPBACK]} {
-        if {[file isdirectory $local_dir/script_support/components/MSS_SPI_LOOPBACK]} {
-            file delete -force $local_dir/script_support/components/MSS_SPI_LOOPBACK
-        }
-        file mkdir $local_dir/script_support/components/MSS_SPI_LOOPBACK
-        create_config $local_dir/script_support/components/MSS/DISCOVERY_MSS.cfg $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg
-        update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI                                " "UNUSED"
-        update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_CLK                                " "UNUSED"
-        update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_DATA_3_2                                " "UNUSED"
-        update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1                                " "MSSIO_B2_B"
-        update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1_SS1                                " "FABRIC"
-        exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_SPI_LOOPBACK
-        source ./script_support/additional_configurations/SPI_LOOPBACK/SPI_LOOPBACK.tcl
-    } elseif {[info exists DRI_CCC_DEMO]} {
-        source ./script_support/additional_configurations/DRI_CCC_DEMO/DRI_CCC_DEMO.tcl
-    }
-    #
-    # // Derive timing constraints
-    #
-    build_design_hierarchy
-    derive_constraints_sdc 
+		if {[info exists I2C_LOOPBACK]} {
+			if {[file isdirectory $local_dir/script_support/components/MSS_I2C_LOOPBACK]} {
+				file delete -force $local_dir/script_support/components/MSS_I2C_LOOPBACK
+			}
+			file mkdir $local_dir/script_support/components/MSS_I2C_LOOPBACK
+			create_config $local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cfg $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg
+			update_param $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg "I2C_1 " "FABRIC"
+			exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_I2C_LOOPBACK
+			source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
+		} elseif {[info exists VECTORBLOX]} {
+			source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
+		} elseif {[info exists SPI_LOOPBACK]} {
+			if {[file isdirectory $local_dir/script_support/components/MSS_SPI_LOOPBACK]} {
+				file delete -force $local_dir/script_support/components/MSS_SPI_LOOPBACK
+			}
+			file mkdir $local_dir/script_support/components/MSS_SPI_LOOPBACK
+			create_config $local_dir/script_support/components/MSS/DISCOVERY_MSS.cfg $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg
+			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI                                " "UNUSED"
+			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_CLK                                " "UNUSED"
+			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_DATA_3_2                                " "UNUSED"
+			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1                                " "MSSIO_B2_B"
+			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1_SS1                                " "FABRIC"
+			exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_SPI_LOOPBACK
+			source ./script_support/additional_configurations/SPI_LOOPBACK/SPI_LOOPBACK.tcl
+		} elseif {[info exists DRI_CCC_DEMO]} {
+			source ./script_support/additional_configurations/DRI_CCC_DEMO/DRI_CCC_DEMO.tcl
+		}
+		#
+		# // Derive timing constraints
+		#
+		build_design_hierarchy
+		derive_constraints_sdc 
 
-    #
-    # // Auto layout SmartDesigns
-    #
-    save_project 
-    sd_reset_layout -sd_name {CLOCKS_AND_RESETS}
-    save_smartdesign -sd_name {CLOCKS_AND_RESETS}
-    sd_reset_layout -sd_name {FIC_0_PERIPHERALS}
-    save_smartdesign -sd_name {FIC_0_PERIPHERALS}
-    sd_reset_layout -sd_name {CORE_I2C_C0_0_WRAPPER}
-    save_smartdesign -sd_name {CORE_I2C_C0_0_WRAPPER}
-    sd_reset_layout -sd_name {FIC_3_ADDRESS_GENERATION}
-    save_smartdesign -sd_name {FIC_3_ADDRESS_GENERATION}
-    sd_reset_layout -sd_name {IHC_SUBSYSTEM}
-    save_smartdesign -sd_name {IHC_SUBSYSTEM}
-    sd_reset_layout -sd_name {FIC_3_PERIPHERALS}
-    save_smartdesign -sd_name {FIC_3_PERIPHERALS}
-    sd_reset_layout -sd_name {MSS_WRAPPER}
-    save_smartdesign -sd_name {MSS_WRAPPER}
-    sd_reset_layout -sd_name {MPFS_DISCOVERY_KIT}
-    save_smartdesign -sd_name {MPFS_DISCOVERY_KIT}
-} ; # // Create new project
+		#
+		# // Auto layout SmartDesigns
+		#
+		save_project 
+		sd_reset_layout -sd_name {CLOCKS_AND_RESETS}
+		save_smartdesign -sd_name {CLOCKS_AND_RESETS}
+		sd_reset_layout -sd_name {FIC_0_PERIPHERALS}
+		save_smartdesign -sd_name {FIC_0_PERIPHERALS}
+		sd_reset_layout -sd_name {CORE_I2C_C0_0_WRAPPER}
+		save_smartdesign -sd_name {CORE_I2C_C0_0_WRAPPER}
+		sd_reset_layout -sd_name {FIC_3_ADDRESS_GENERATION}
+		save_smartdesign -sd_name {FIC_3_ADDRESS_GENERATION}
+		sd_reset_layout -sd_name {IHC_SUBSYSTEM}
+		save_smartdesign -sd_name {IHC_SUBSYSTEM}
+		sd_reset_layout -sd_name {FIC_3_PERIPHERALS}
+		save_smartdesign -sd_name {FIC_3_PERIPHERALS}
+		sd_reset_layout -sd_name {MSS_WRAPPER}
+		save_smartdesign -sd_name {MSS_WRAPPER}
+		sd_reset_layout -sd_name {MPFS_DISCOVERY_KIT}
+		save_smartdesign -sd_name {MPFS_DISCOVERY_KIT}
 
+		# 
+		# Compile and integrate the SmartHLS code
+		#
+		if {[info exists SMARTHLS]} {
+			if {$isNewProject} {
+				# Prepare the SmartDesign for HLS integration 
+				source ./script_support/additional_configurations/smarthls/pre_hls_integration.tcl
+			}
 
-# 
-# Compile and integrate the SmartHLS code
-#
-if {[info exists SMARTHLS]} {
-    if {$isNewProject} {
-        # Prepare the SmartDesign for HLS integration 
-        source ./script_support/additional_configurations/smarthls/pre_hls_integration.tcl
-    }
+			# If the SmartHLS variable points to a valid SmartHLS project directory, then compile it.
+			# Otherwise, HLS modules can be added later.
+			if {[file isdirectory $SMARTHLS]} {
+				source ./script_support/additional_configurations/smarthls/compile_and_integrate_shls_to_refdesign.tcl
+			}
+		}
+		
+		#
+		# // Derive timing constraints
+		#
 
-    # If the SmartHLS variable points to a valid SmartHLS project directory, then compile it.
-    # Otherwise, HLS modules can be added later.
-    if {[file isdirectory $SMARTHLS]} {
-        source ./script_support/additional_configurations/smarthls/compile_and_integrate_shls_to_refdesign.tcl
-    }
-}
+		build_design_hierarchy
+		derive_constraints_sdc 
 
-#
-# // Derive timing constraints
-#
+	} elseif {[info exists MIV_RV32_CFG1]} {
+		cd ./script_support/additional_configurations/RV32/CFG1/BaseDesign/
+		source BaseDesign_recursive.tcl
+		set_root -module {BaseDesign::work} 
+		
+		build_design_hierarchy
+		derive_constraints_sdc 
+		
+		cd ../../../../../
+		
+		#
+		# // Import I/O constraints
+		#
 
-build_design_hierarchy
-derive_constraints_sdc 
+		import_files \
+			-convert_EDN_to_HDL 0 \
+			-library {work} \
+			-sdc "${constraint_path}/RV32/io_jtag_constraints.sdc" \
+			-io_pdc "${constraint_path}/RV32/RV32_IO.pdc" 		
+			
+		organize_tool_files \
+		-tool {SYNTHESIZE} \
+		-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+		-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+		-module {BaseDesign::work} \
+		-input_type {constraint} 
+		
+		organize_tool_files \
+			-tool {PLACEROUTE} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io/RV32_IO.pdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+			
+		organize_tool_files \
+			-tool {VERIFYTIMING} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+		
+		save_project 
+		sd_reset_layout -sd_name {BaseDesign}
+		save_smartdesign -sd_name {BaseDesign}
+
+	} elseif {[info exists MIV_RV32_CFG2]} {
+		cd ./script_support/additional_configurations/RV32/CFG2/BaseDesign/
+		source BaseDesign_recursive.tcl
+		set_root -module {BaseDesign::work} 
+		
+		build_design_hierarchy
+		derive_constraints_sdc 
+		
+		cd ../../../../../
+		
+		#
+		# // Import I/O constraints
+		#
+
+		import_files \
+			-convert_EDN_to_HDL 0 \
+			-library {work} \
+			-sdc "${constraint_path}/RV32/io_jtag_constraints.sdc" \
+			-io_pdc "${constraint_path}/RV32/RV32_IO.pdc" 		
+			
+		organize_tool_files \
+		-tool {SYNTHESIZE} \
+		-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+		-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+		-module {BaseDesign::work} \
+		-input_type {constraint} 
+		
+		organize_tool_files \
+			-tool {PLACEROUTE} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io/RV32_IO.pdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+			
+		organize_tool_files \
+			-tool {VERIFYTIMING} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+			
+		save_project 
+		sd_reset_layout -sd_name {BaseDesign}
+		save_smartdesign -sd_name {BaseDesign}
+
+	} elseif {[info exists MIV_RV32_CFG3]} {
+		cd ./script_support/additional_configurations/RV32/CFG3/BaseDesign/
+		source BaseDesign_recursive.tcl
+		set_root -module {BaseDesign::work} 
+		
+		build_design_hierarchy
+		derive_constraints_sdc 
+		
+		cd ../../../../../
+		
+		#
+		# // Import I/O constraints
+		#
+
+		import_files \
+			-convert_EDN_to_HDL 0 \
+			-library {work} \
+			-sdc "${constraint_path}/RV32/io_jtag_constraints.sdc" \
+			-io_pdc "${constraint_path}/RV32/RV32_IO.pdc" 		
+			
+		organize_tool_files \
+		-tool {SYNTHESIZE} \
+		-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+		-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+		-module {BaseDesign::work} \
+		-input_type {constraint} 
+		
+		organize_tool_files \
+			-tool {PLACEROUTE} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io/RV32_IO.pdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+			
+		organize_tool_files \
+			-tool {VERIFYTIMING} \
+			-file "${project_dir}/constraint/BaseDesign_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io_jtag_constraints.sdc" \
+			-module {BaseDesign::work} \
+			-input_type {constraint} 
+
+		save_project 
+		sd_reset_layout -sd_name {BaseDesign}
+		save_smartdesign -sd_name {BaseDesign}
+		
+	}
+}	
 
 #
 # // Run the design flow and add eNVM clients if required

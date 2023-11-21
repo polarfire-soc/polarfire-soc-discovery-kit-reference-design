@@ -4,6 +4,9 @@ MPFS_DISCOVERY_SPI_LOOPBACK/
 MPFS_DISCOVERY_Vectorblox/
 MPFS_DISCOVERY_DRI_CCC_DEMO/
 MPFS_DISCOVERY_MICRON_QSPI/
+MPFS_DISCOVERY_MIV_RV32_CFG1/
+MPFS_DISCOVERY_MIV_RV32_CFG2/
+MPFS_DISCOVERY_MIV_RV32_CFG3/
 soc/
 script_support/additional_configurations/smarthls/**/hls_output
 script_support/additional_configurations/smarthls/**/component
