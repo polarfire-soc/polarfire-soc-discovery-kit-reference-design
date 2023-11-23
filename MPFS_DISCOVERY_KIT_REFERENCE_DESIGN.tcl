@@ -51,51 +51,55 @@ set constraint_path ./script_support/constraints
 if {[info exists I2C_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_I2C_LOOPBACK"
     set project_dir "$local_dir/MPFS_DISCOVERY_I2C_LOOPBACK"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists VECTORBLOX]} {
     set project_name "MPFS_DISCOVERY_Vectorblox"
     set project_dir "$local_dir/MPFS_DISCOVERY_Vectorblox"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists SPI_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_SPI_LOOPBACK"
     set project_dir "$local_dir/MPFS_DISCOVERY_SPI_LOOPBACK"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists DRI_CCC_DEMO]} {
     set project_name "MPFS_DISCOVERY_DRI_CCC_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_DRI_CCC_DEMO"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists SMARTHLS]} {
     set project_name "Discovery_SoC"
     set project_dir "$local_dir/soc"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists BFM_SIMULATION] && [info exists AXI4_STREAM_DEMO]} {
     set project_name "MPFS_DISCOVERY_AXI4_STREAM_DEMO_BFM"
     set project_dir "$local_dir/MPFS_DISCOVERY_AXI4_STREAM_DEMO_BFM"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists AXI4_STREAM_DEMO]} {
     set project_name "MPFS_DISCOVERY_AXI4_STREAM_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_AXI4_STREAM_DEMO"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists BFM_SIMULATION]} {
     set project_name "MPFS_DISCOVERY_BFM_SIMULATION"
     set project_dir "$local_dir/MPFS_DISCOVERY_BFM_SIMULATION"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 } elseif {[info exists MIV_RV32_CFG1]} {
 	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG1"
     set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG1"
-	set SOFTCPU 1
+	set ALTCONFIG 1
 } elseif {[info exists MIV_RV32_CFG2]} {
 	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG2"
     set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG2"
-	set SOFTCPU 1
+	set ALTCONFIG 1
 } elseif {[info exists MIV_RV32_CFG3]} {
 	set project_name "MPFS_DISCOVERY_MIV_RV32_CFG3"
     set project_dir "$local_dir/MPFS_DISCOVERY_MIV_RV32_CFG3"
-	set SOFTCPU 1
+	set ALTCONFIG 1
+} elseif {[info exists FIR_DEMO]} {
+	set project_name "MPFS_DISCOVERY_FIR_DEMO"
+    set project_dir "$local_dir/MPFS_DISCOVERY_FIR_DEMO"
+	set ALTCONFIG 1
 } else {
     set project_name "MPFS_DISCOVERY"
     set project_dir "$local_dir/MPFS_DISCOVERY"
-	set SOFTCPU 0
+	set ALTCONFIG 0
 }
 
 source ./script_support/additional_configurations/functions.tcl
@@ -182,7 +186,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		puts "Downloading cores failed, the script will continute but will fail if all of the required cores aren't present in the vault."
 	}
 	
-	if {$SOFTCPU == 0} {
+	if {$ALTCONFIG == 0} {
 		#
 		#  // Generate and import MSS component
 		#
@@ -468,6 +472,50 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		sd_reset_layout -sd_name {BaseDesign}
 		save_smartdesign -sd_name {BaseDesign}
 		
+	} elseif {[info exists FIR_DEMO]} {
+		cd ./script_support/additional_configurations/FIR_demo/top/
+		source top_recursive.tcl
+		set_root -module {top::work} 
+		
+		build_design_hierarchy
+		derive_constraints_sdc 
+		
+		cd ../../../../
+		
+		#
+		# // Import I/O constraints
+		#
+	
+		import_files \
+			-convert_EDN_to_HDL 0 \
+			-library {work} \
+			-io_pdc "${constraint_path}/FIR_demo/io_constraints.pdc" \
+			
+		organize_tool_files \
+			-tool {SYNTHESIZE} \
+			-file "${project_dir}/constraint/top_derived_constraints.sdc" \
+			-module {top::work} \
+			-input_type {constraint} 
+		
+		organize_tool_files \
+			-tool {PLACEROUTE} \
+			-file "${project_dir}/constraint/top_derived_constraints.sdc" \
+			-file "${project_dir}/constraint/io/io_constraints.pdc" \
+			-module {top::work} \
+			-input_type {constraint} 
+			
+		organize_tool_files \
+			-tool {VERIFYTIMING} \
+			-file "${project_dir}/constraint/top_derived_constraints.sdc" \
+			-module {top::work} \
+			-input_type {constraint} 
+
+		save_project 
+		sd_reset_layout -sd_name {top}
+		save_smartdesign -sd_name {top}
+		sd_reset_layout -sd_name {PFSOC_DSP_FLOW_TOP}
+		save_smartdesign -sd_name {PFSOC_DSP_FLOW_TOP}
+		
 	}
 }	
 
@@ -507,7 +555,7 @@ if {[info exists GENERATE_PROGRAMMING_DATA]} {
     set jobPath $local_dir
     if {[file isdirectory $EXPORT_FPE]} {set jobPath $EXPORT_FPE}
 
-    set components "FABRIC_SNVM"
+    set components "FABRIC SNVM"
     if {[info exists HSS_UPDATE]} { set components "$components ENVM" }
 
     puts "export_fpe_job $project_name $jobPath $components $gUseSPI"
