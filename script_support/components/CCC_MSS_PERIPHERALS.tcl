@@ -2,7 +2,7 @@
 # Family: PolarFireSoC
 # Part Number: MPFS095T-1FCSG325E
 # Create and Configure the core component CCC_MSS_PERIPHERALS
-create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_name {CCC_MSS_PERIPHERALS} -params {\
+create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:*} -component_name {CCC_MSS_PERIPHERALS} -params {\
 "DLL_CLK_0_BANKCLK_EN:false"  \
 "DLL_CLK_0_DEDICATED_EN:false"  \
 "DLL_CLK_0_FABCLK_EN:false"  \

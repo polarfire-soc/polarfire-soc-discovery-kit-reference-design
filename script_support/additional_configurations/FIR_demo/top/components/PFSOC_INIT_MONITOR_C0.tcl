@@ -2,7 +2,7 @@
 # Family: PolarFireSoC
 # Part Number: MPFS095T-1FCSG325I
 # Create and Configure the core component PFSOC_INIT_MONITOR_C0
-create_and_configure_core -core_vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:1.0.307} -component_name {PFSOC_INIT_MONITOR_C0} -params {\
+create_and_configure_core -core_vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:*} -component_name {PFSOC_INIT_MONITOR_C0} -params {\
 "BANK_0_CALIB_STATUS_ENABLED:false"  \
 "BANK_0_CALIB_STATUS_SIMULATION_DELAY:1"  \
 "BANK_0_RECALIBRATION_ENABLED:false"  \
