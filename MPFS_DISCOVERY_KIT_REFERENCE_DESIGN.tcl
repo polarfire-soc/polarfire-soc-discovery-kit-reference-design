@@ -56,10 +56,6 @@ if {[info exists I2C_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_Vectorblox"
     set project_dir "$local_dir/MPFS_DISCOVERY_Vectorblox"
 	set ALTCONFIG 0
-} elseif {[info exists SPI_LOOPBACK]} {
-    set project_name "MPFS_DISCOVERY_SPI_LOOPBACK"
-    set project_dir "$local_dir/MPFS_DISCOVERY_SPI_LOOPBACK"
-	set ALTCONFIG 0
 } elseif {[info exists DRI_CCC_DEMO]} {
     set project_name "MPFS_DISCOVERY_DRI_CCC_DEMO"
     set project_dir "$local_dir/MPFS_DISCOVERY_DRI_CCC_DEMO"
@@ -268,19 +264,6 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
 		} elseif {[info exists VECTORBLOX]} {
 			source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
-		} elseif {[info exists SPI_LOOPBACK]} {
-			if {[file isdirectory $local_dir/script_support/components/MSS_SPI_LOOPBACK]} {
-				file delete -force $local_dir/script_support/components/MSS_SPI_LOOPBACK
-			}
-			file mkdir $local_dir/script_support/components/MSS_SPI_LOOPBACK
-			create_config $local_dir/script_support/components/MSS/DISCOVERY_MSS.cfg $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg
-			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI                                " "UNUSED"
-			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_CLK                                " "UNUSED"
-			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "QSPI_DATA_3_2                                " "UNUSED"
-			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1                                " "MSSIO_B2_B"
-			update_param $local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg "SPI_1_SS1                                " "FABRIC"
-			exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/SPI_LOOPBACK/DISCOVERY_MSS_SPI_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_SPI_LOOPBACK
-			source ./script_support/additional_configurations/SPI_LOOPBACK/SPI_LOOPBACK.tcl
 		} elseif {[info exists DRI_CCC_DEMO]} {
 			source ./script_support/additional_configurations/DRI_CCC_DEMO/DRI_CCC_DEMO.tcl
 		}
