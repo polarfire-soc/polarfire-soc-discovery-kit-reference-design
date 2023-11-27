@@ -499,6 +499,12 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		sd_reset_layout -sd_name {PFSOC_DSP_FLOW_TOP}
 		save_smartdesign -sd_name {PFSOC_DSP_FLOW_TOP}
 		
+		if {[info exists SIMULATE]} {
+			catch [run_tool -name {SIM_PRESYNTH}]
+			save_project
+			puts "Simulation completed successfully\n"
+		}
+
 	}
 }	
 
