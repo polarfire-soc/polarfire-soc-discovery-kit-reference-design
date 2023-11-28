@@ -32,7 +32,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_75MHz" "CCC:OUT1_FABCLK_0" 
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_50MHz" "CCC:OUT2_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLK_25MHz" "CCC:OUT3_FABCLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"RESET_FIC_3_CLK:PLL_POWERDOWN_B" "CCC:PLL_POWERDOWN_N_0" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"OSCILLATOR_160MHz:RCOSC_160MHZ_GL" "CCC:REF_CLK_0" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLKINT_REF_CLK_50MHz:Y" "CCC:REF_CLK_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PLL0_DRI" "CCC:PLL0_DRI" }
 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {CCC:PLL_LOCK_0}
@@ -45,51 +45,51 @@ generate_component -component_name ${sd_name}
 set sd_name {MSS_WRAPPER}
 open_smartdesign -sd_name ${sd_name}
 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_2_IO:D"} 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_2_IO:E"} 
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_2_IO:E} -value {VCC} 
-sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_2_IO:D} -port_name {CLK_100MHz} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_2:D"} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_2:E"} 
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_2:E} -value {VCC} 
+sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_2:D} -port_name {CLK_100MHz} 
 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_4_IO:D"} 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_4_IO:E"} 
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_4_IO:E} -value {VCC} 
-sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_4_IO:D} -port_name {CLK_75MHz} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_4:D"} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_4:E"} 
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_4:E} -value {VCC} 
+sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_4:D} -port_name {CLK_75MHz} 
 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_8_IO:D"} 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_8_IO:E"} 
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_8_IO:E} -value {VCC} 
-sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_8_IO:D} -port_name {CLK_50MHz} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_8:D"} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_8:E"} 
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_8:E} -value {VCC} 
+sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_8:D} -port_name {CLK_50MHz} 
 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_9_IO:D"} 
-sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_9_IO:E"} 
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_9_IO:E} -value {VCC} 
-sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_9_IO:D} -port_name {CLK_25MHz} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_9:D"} 
+sd_disconnect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_9:E"} 
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {GPIO_2_9:E} -value {VCC} 
+sd_connect_pin_to_port -sd_name ${sd_name} -pin_name {GPIO_2_9:D} -port_name {CLK_25MHz} 
 
 auto_promote_pad_pins -promote_all 1
 save_smartdesign -sd_name ${sd_name}
 generate_component -component_name ${sd_name}
 
-# Update the MPFS_ICICLE_KIT_BASE_DESIGN to connect the DRI and GPIO outputs
+# Update the MPFS_DISCOVERY_KIT to connect the DRI and GPIO outputs
 
-set sd_name {MPFS_ICICLE_KIT_BASE_DESIGN}
+set sd_name {MPFS_DISCOVERY_KIT}
 open_smartdesign -sd_name ${sd_name}
 
-sd_update_instance -sd_name ${sd_name} -instance_name {CLOCKS_AND_RESETS} 
-sd_update_instance -sd_name ${sd_name} -instance_name {MSS_WRAPPER_1} 
+sd_update_instance -sd_name ${sd_name} -instance_name {CLOCKS_AND_RESETS_0} 
+sd_update_instance -sd_name ${sd_name} -instance_name {MSS_WRAPPER_0} 
 
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:PLL0_DRI" "FIC_3_PERIPHERALS_1:PLL0_SW_DRI" }
-
-
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_100MHz" "MSS_WRAPPER_1:CLK_100MHz"} 
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:PLL0_DRI" "FIC_3_PERIPHERALS_0:PLL0_SW_DRI" }
 
 
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_75MHz" "MSS_WRAPPER_1:CLK_75MHz"} 
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:CLK_100MHz" "MSS_WRAPPER_0:CLK_100MHz"} 
 
 
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_50MHz" "MSS_WRAPPER_1:CLK_50MHz"} 
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:CLK_75MHz" "MSS_WRAPPER_0:CLK_75MHz"} 
 
 
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS:CLK_25MHz" "MSS_WRAPPER_1:CLK_25MHz"} 
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:CLK_50MHz" "MSS_WRAPPER_0:CLK_50MHz"} 
+
+
+sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:CLK_25MHz" "MSS_WRAPPER_0:CLK_25MHz"} 
 
 auto_promote_pad_pins -promote_all 1
 save_smartdesign -sd_name ${sd_name}
@@ -100,7 +100,7 @@ import_files -convert_EDN_to_HDL 0 -fp_pdc "${constraint_path}/CCC.pdc"
 organize_tool_files \
     -tool {PLACEROUTE} \
     -file "${project_dir}/constraint/fp/CCC.pdc" \
-    -module {MPFS_ICICLE_KIT_BASE_DESIGN::work} \
+    -module {MPFS_DISCOVERY_KIT::work} \
     -input_type {constraint}
 
 build_design_hierarchy
