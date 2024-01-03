@@ -1,3 +1,19 @@
+set_io -port_name RPI_I2C_SDA \
+    -pin_name E18 \
+    -fixed true                   \
+    -io_std LVCMOS33              \
+    -CLAMP_DIODE OFF              \
+    -RES_PULL None                \
+    -DIRECTION INOUT
+
+set_io -port_name RPI_I2C_SCL \
+    -pin_name F18 \
+    -fixed true                   \
+    -io_std LVCMOS33              \
+    -CLAMP_DIODE OFF              \
+    -RES_PULL None                \
+    -DIRECTION INOUT
+
 set_io -port_name RPI_GPIO4 \
     -pin_name E12 \
     -fixed true \

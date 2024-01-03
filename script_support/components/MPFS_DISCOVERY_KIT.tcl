@@ -73,8 +73,7 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {SPISS} -port_direction {OU
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SPI_1_DO} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {WE_N} -port_direction {OUT} -port_is_pad {1}
 
-sd_create_scalar_port -sd_name ${sd_name} -port_name {COREI2C_C0_SCL} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {COREI2C_C0_SDA} -port_direction {INOUT} -port_is_pad {1}
+
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CLK} -port_direction {INOUT} -port_is_pad {1}
@@ -96,6 +95,8 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO27} -port_directio
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO4} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO5} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO6} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_I2C_SCL} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_I2C_SDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_CMD} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA0} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA1} -port_direction {INOUT} -port_is_pad {1}
@@ -242,8 +243,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MSS_TO_FABR
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:REF_CLK_50MHz" "REF_CLK_50MHz" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:RESETN_FIC_0_CLK" "FIC_0_PERIPHERALS_0:ARESETN" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:RESETN_FIC_3_CLK" "FIC_3_PERIPHERALS_0:PRESETN" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"COREI2C_C0_SCL" "FIC_3_PERIPHERALS_0:COREI2C_C0_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"COREI2C_C0_SDA" "FIC_3_PERIPHERALS_0:COREI2C_C0_SDA" }
+
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CS0_N" "MSS_WRAPPER_0:CS0_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP1" "MSS_WRAPPER_0:MSS_INT_F2M[6:6]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP2" "MSS_WRAPPER_0:MSS_INT_F2M[7:7]" }
@@ -254,6 +254,8 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP6" "MSS_WRAPPER_0:GPIO_2_F2M
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP7" "MSS_WRAPPER_0:GPIO_2_F2M_27" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP8" "MSS_WRAPPER_0:GPIO_2_F2M_28" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_PERIPHERALS_0:DMA_CONTROLLER_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[2:2]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:COREI2C_C0_SCL" "RPI_I2C_SCL" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:COREI2C_C0_SDA" "RPI_I2C_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:CORE_I2C_C0_INT" "MSS_WRAPPER_0:MSS_INT_F2M[4:4]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:CoreUARTapb_RX" "MBUS_UART_TXD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:CoreUARTapb_TX" "MBUS_UART_RXD" }
