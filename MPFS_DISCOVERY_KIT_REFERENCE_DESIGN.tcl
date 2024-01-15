@@ -178,7 +178,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:SystemBuilder:PF_DDR3:2.4.122} -location {www.microchip-ip.com/repositories/SgCore}
         download_core -vlnv {Actel:DirectCore:CORESPI:5.2.104} -location {www.microchip-ip.com/repositories/SgCore} 
 		download_core -vlnv {Actel:DirectCore:COREUART:5.7.100} -location {www.microchip-ip.com/repositories/DirectCore}
-		download_core -vlnv {Actel:DirectCore:COREFT:8.0.107} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREFFT:8.0.107} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:DirectCore:COREFIR_PF:3.0.121} -location {www.microchip-ip.com/repositories/DirectCore}
 	} on error err {
 		puts "Downloading cores failed, the script will continute but will fail if all of the required cores aren't present in the vault."
