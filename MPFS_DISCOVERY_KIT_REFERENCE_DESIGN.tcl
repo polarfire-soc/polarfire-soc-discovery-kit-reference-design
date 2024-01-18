@@ -56,10 +56,6 @@ if {[info exists I2C_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_Vectorblox"
     set project_dir "$local_dir/MPFS_DISCOVERY_Vectorblox"
 	set ALTCONFIG 0
-} elseif {[info exists DRI_CCC_DEMO]} {
-    set project_name "MPFS_DISCOVERY_DRI_CCC_DEMO"
-    set project_dir "$local_dir/MPFS_DISCOVERY_DRI_CCC_DEMO"
-	set ALTCONFIG 0
 } elseif {[info exists SMARTHLS]} {
     set project_name "Discovery_SoC"
     set project_dir "$local_dir/soc"
@@ -103,6 +99,7 @@ source ./script_support/additional_configurations/functions.tcl
 #
 # // Open or create a Libero project
 #
+
 if { [file exists $project_dir/$project_name.prjx] } {
     puts "Open existing project"
     open_project -file $project_dir/$project_name.prjx
@@ -147,6 +144,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
     #
     # // Download required cores
     #
+	
 	try {
 		download_core -vlnv {Actel:SgCore:PF_OSC:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_CCC:*} -location {www.microchip-ip.com/repositories/SgCore}
@@ -185,6 +183,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 	}
 	
 	if {$ALTCONFIG == 0} {
+	
 		#
 		#  // Generate and import MSS component
 		#
@@ -266,18 +265,19 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
 		} elseif {[info exists VECTORBLOX]} {
 			source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
-		} elseif {[info exists DRI_CCC_DEMO]} {
-			source ./script_support/additional_configurations/DRI_CCC_DEMO/DRI_CCC_DEMO.tcl
 		}
+		
 		#
 		# // Derive timing constraints
 		#
+		
 		build_design_hierarchy
 		derive_constraints_sdc 
 
 		#
 		# // Auto layout SmartDesigns
 		#
+		
 		save_project 
 		sd_reset_layout -sd_name {CLOCKS_AND_RESETS}
 		save_smartdesign -sd_name {CLOCKS_AND_RESETS}
@@ -299,6 +299,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		# 
 		# Compile and integrate the SmartHLS code
 		#
+		
 		if {[info exists SMARTHLS]} {
 			if {$isNewProject} {
 				# Prepare the SmartDesign for HLS integration 
@@ -514,8 +515,8 @@ if { [file exists $project_dir/$project_name.prjx] } {
 # // Run the design flow and add eNVM clients if required
 #
 
-# Enabling minimum delay repair
-configure_tool -name {PLACEROUTE} -params {DELAY_ANALYSIS:MAX} -params {EFFORT_LEVEL:false} -params {GB_DEMOTION:true} -params {INCRPLACEANDROUTE:false} -params {IOREG_COMBINING:false} -params {MULTI_PASS_CRITERIA:VIOLATIONS} -params {MULTI_PASS_LAYOUT:false} -params {NUM_MULTI_PASSES:5} -params {PDPR:false} -params {RANDOM_SEED:0} -params {REPAIR_MIN_DELAY:true} -params {REPLICATION:false} -params {SLACK_CRITERIA:WORST_SLACK} -params {SPECIFIC_CLOCK:} -params {START_SEED_INDEX:1} -params {STOP_ON_FIRST_PASS:false} -params {TDPR:true} 
+# Enabling minimum delay repair and multi pass max delay
+configure_tool -name {PLACEROUTE} -params {DELAY_ANALYSIS:MAX} -params {EFFORT_LEVEL:true} -params {GB_DEMOTION:true} -params {INCRPLACEANDROUTE:false} -params {IOREG_COMBINING:false} -params {MULTI_PASS_CRITERIA:VIOLATIONS} -params {MULTI_PASS_LAYOUT:true} -params {NUM_MULTI_PASSES:5} -params {PDPR:false} -params {RANDOM_SEED:0} -params {REPAIR_MIN_DELAY:true} -params {REPLICATION:false} -params {SLACK_CRITERIA:WORST_SLACK} -params {SPECIFIC_CLOCK:} -params {START_SEED_INDEX:1} -params {STOP_ON_FIRST_PASS:true} -params {TDPR:true} 
 
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
@@ -527,10 +528,10 @@ if {[info exists SYNTHESIZE]} {
 
 if {[info exists HSS_UPDATE]} {
     if !{[file exists "./script_support/hss-envm-wrapper.mpfs-Discovery-kit-es.hex"]} {
-        if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/latest/download/hss-envm-wrapper.mpfs-Discovery-kit-es.hex -P ./script_support/} issue]} {
+        if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/latest/download/hss-envm-wrapper.mpfs-discovery-kit-es.hex -P ./script_support/} issue]} {
         }
     }
-    create_eNVM_config "$local_dir/script_support/components/MSS/ENVM.cfg" "$local_dir/script_support/hss-envm-wrapper.mpfs-Discovery-kit-es.hex"
+    create_eNVM_config "$local_dir/script_support/components/MSS/ENVM.cfg" "$local_dir/script_support/hss-envm-wrapper.mpfs-discovery-kit-es.hex"
     run_tool -name {GENERATEPROGRAMMINGDATA}
     configure_envm -cfg_file {script_support/components/MSS/ENVM.cfg}
 }
