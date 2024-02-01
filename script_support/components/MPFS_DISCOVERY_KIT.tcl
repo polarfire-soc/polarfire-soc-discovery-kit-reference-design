@@ -305,6 +305,9 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_14_IO" "RP
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_15_IO" "RPI_GPIO20" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_16_IO" "RPI_GPIO21" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_1_IO" "RPI_GPIO17" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_26_OUT" "MSS_WRAPPER_0:GPIO_2_F2M_30" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_27_OUT" "MSS_WRAPPER_0:GPIO_2_F2M_31" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_28_OUT" "MSS_WRAPPER_0:MSS_INT_F2M[0:0]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_2_IO" "RPI_GPIO18" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_3_IO" "RPI_GPIO27" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:GPIO_2_4_IO" "RPI_GPIO22" }

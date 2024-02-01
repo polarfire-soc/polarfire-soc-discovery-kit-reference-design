@@ -54,6 +54,8 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_25} -port_direc
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_26} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_27} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_28} -port_direction {IN}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_30} -port_direction {IN}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_F2M_31} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_0_RXD_F2M} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_1_RXD} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_4_RXD} -port_direction {IN} -port_is_pad {1}
@@ -113,6 +115,9 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_3_APB_INITIATOR_FIC_3_
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_3_APB_INITIATOR_FIC_3_APB_M_PWRITE} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_1_20_OUT} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_1_9_OUT} -port_direction {OUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_26_OUT} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_27_OUT} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_28_OUT} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_M2F_17} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_M2F_18} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_M2F_19} -port_direction {OUT}
@@ -509,6 +514,21 @@ sd_create_bif_port -sd_name ${sd_name} -port_name {FIC_2_AXI4_TARGET} -port_bif_
 "RVALID:FIC_2_AXI4_TARGET_FIC_2_AXI4_S_RVALID" \
 "RREADY:FIC_2_AXI4_TARGET_FIC_2_AXI4_S_RREADY" } 
 
+# Add AND2_GPIO_2_26_OUT instance
+sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND2} -instance_name {AND2_GPIO_2_26_OUT}
+
+
+
+# Add AND2_GPIO_2_27_OUT instance
+sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND2} -instance_name {AND2_GPIO_2_27_OUT}
+
+
+
+# Add AND2_GPIO_2_28_OUT instance
+sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND2} -instance_name {AND2_GPIO_2_28_OUT}
+
+
+
 # Add AND3_MSS_PLL_LOCKS instance
 sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND3} -instance_name {AND3_MSS_PLL_LOCKS}
 
@@ -645,6 +665,15 @@ sd_instantiate_macro -sd_name ${sd_name} -macro_name {BIBUF} -instance_name {SPI
 
 # Add scalar net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"ACT_N" "MPFS_DISCOVERY_KIT_MSS_0:ACT_N" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_26_OUT:A" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_26" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_26_OUT:B" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_26" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_26_OUT:Y" "GPIO_2_26_OUT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_27_OUT:A" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_27" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_27_OUT:B" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_27" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_27_OUT:Y" "GPIO_2_27_OUT" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:A" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_28" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:B" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_28" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:Y" "GPIO_2_28_OUT" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:A" "MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:B" "MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:C" "MPFS_DISCOVERY_KIT_MSS_0:PLL_SGMII_LOCK_M2F" }
@@ -740,6 +769,8 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_25" "MPFS_DISCOVERY_
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_26" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_F2M_26" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_27" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_F2M_27" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_28" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_F2M_28" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_30" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_F2M_30" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_F2M_31" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_F2M_31" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_M2F_17" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_17" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_M2F_18" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_18" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"GPIO_2_M2F_19" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_19" }
