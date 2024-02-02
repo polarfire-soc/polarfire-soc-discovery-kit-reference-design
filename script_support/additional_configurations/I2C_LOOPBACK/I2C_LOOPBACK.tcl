@@ -123,6 +123,9 @@ sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:MAC_
 sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:CoreUARTapb_TX} 
 sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:PWM_0} 
 sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:CoreUARTapb_RX} -value {GND} 
+sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:GPIO_2_F2M_30} -value {GND} 
+sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:GPIO_2_F2M_31} -value {GND} 
+sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:MSS_INT_F2M[0]} -value {GND} 
 
 auto_promote_pad_pins -promote_all 1
 save_smartdesign -sd_name ${sd_name}
