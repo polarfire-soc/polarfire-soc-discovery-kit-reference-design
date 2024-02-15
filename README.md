@@ -1,1 +1,0 @@
-# polarfire-soc-discovery-kit-reference-design
