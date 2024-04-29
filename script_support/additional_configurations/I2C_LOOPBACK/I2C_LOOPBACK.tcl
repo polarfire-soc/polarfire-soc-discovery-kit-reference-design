@@ -90,8 +90,6 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:GPI
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_10} 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_16} 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_12} 
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDO_OE_M2F} 
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDO_M2F} 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:SPI_0_SS1_OE_M2F} 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:SPI_0_CLK_M2F} 
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:SPI_0_CLK_OE_M2F} 
@@ -119,7 +117,6 @@ sd_delete_ports -sd_name {MPFS_DISCOVERY_KIT} -port_names {MBUS_UART_RXD}
 sd_delete_ports -sd_name {MPFS_DISCOVERY_KIT} -port_names {mBUS_INT} 
 sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:SPI_0_DI_F2M} -value {GND} 
 sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:MSS_INT_F2M[3:3]} -value {GND} 
-sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {MSS_WRAPPER_0:MAC_0_MDC} 
 sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:CoreUARTapb_TX} 
 sd_mark_pins_unused -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:PWM_0} 
 sd_connect_pins_to_constant -sd_name {MPFS_DISCOVERY_KIT} -pin_names {FIC_3_PERIPHERALS_0:CoreUARTapb_RX} -value {GND} 
