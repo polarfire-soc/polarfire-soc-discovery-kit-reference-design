@@ -1,4 +1,4 @@
-# Creating SmartDesign MSS_WRAPPER
+# Creating SmartDesign "MSS_WRAPPER"
 set sd_name {MSS_WRAPPER}
 create_smartdesign -sd_name ${sd_name}
 
@@ -6,7 +6,6 @@ create_smartdesign -sd_name ${sd_name}
 auto_promote_pad_pins -promote_all 0
 
 # Create top level Scalar Ports
-sd_create_scalar_port -sd_name ${sd_name} -port_name {EMMC_SD_CLK_F2M} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_0_ACLK} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_0_AXI4_INITIATOR_FIC_0_AXI4_M_ARREADY} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {FIC_0_AXI4_INITIATOR_FIC_0_AXI4_M_AWREADY} -port_direction {IN}
@@ -130,7 +129,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_0_TXD_M2F} -port_di
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_1_TXD} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MMUART_4_TXD} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MSS_DLL_LOCKS} -port_direction {OUT}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {MSS_PLL_LOCKS} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MSS_RESET_N_M2F} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {ODT0} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RAS_N} -port_direction {OUT} -port_is_pad {1}
@@ -167,6 +165,7 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_8_IO} -port_directi
 sd_create_scalar_port -sd_name ${sd_name} -port_name {GPIO_2_9_IO} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_0_SCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {I2C_0_SDA} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {MDIO_PAD} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_CMD} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA0} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_DATA1} -port_direction {INOUT} -port_is_pad {1}
@@ -529,11 +528,6 @@ sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND2} -instance_name {AND2
 
 
 
-# Add AND3_MSS_PLL_LOCKS instance
-sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND3} -instance_name {AND3_MSS_PLL_LOCKS}
-
-
-
 # Add AND4_MSS_DLL_LOCKS instance
 sd_instantiate_macro -sd_name ${sd_name} -macro_name {AND4} -instance_name {AND4_MSS_DLL_LOCKS}
 
@@ -636,9 +630,16 @@ sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {I2C_0_SDA_BIBUF:D} -
 
 
 
+# Add MDIO instance
+sd_instantiate_macro -sd_name ${sd_name} -macro_name {BIBUF} -instance_name {MDIO}
+
+
+
 # Add MPFS_DISCOVERY_KIT_MSS_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {MPFS_DISCOVERY_KIT_MSS} -instance_name {MPFS_DISCOVERY_KIT_MSS_0}
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDI_F2M} -value {GND}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F}
+sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:PLL_SGMII_LOCK_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_TSU_SOF_TX_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_TSU_SYNC_FRAME_TX_M2F}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {MPFS_DISCOVERY_KIT_MSS_0:MAC_0_TSU_DELAY_REQ_TX_M2F}
@@ -674,10 +675,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_27_OUT:Y" "GPIO_2_2
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:A" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_M2F_28" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:B" "MPFS_DISCOVERY_KIT_MSS_0:GPIO_2_OE_M2F_28" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND2_GPIO_2_28_OUT:Y" "GPIO_2_28_OUT" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:A" "MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:B" "MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:C" "MPFS_DISCOVERY_KIT_MSS_0:PLL_SGMII_LOCK_M2F" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"AND3_MSS_PLL_LOCKS:Y" "MSS_PLL_LOCKS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_MSS_DLL_LOCKS:A" "MPFS_DISCOVERY_KIT_MSS_0:FIC_0_DLL_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_MSS_DLL_LOCKS:B" "MPFS_DISCOVERY_KIT_MSS_0:FIC_1_DLL_LOCK_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"AND4_MSS_DLL_LOCKS:C" "MPFS_DISCOVERY_KIT_MSS_0:FIC_2_DLL_LOCK_M2F" }
@@ -689,7 +686,6 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0" "MPFS_DISCOVERY_KIT_MSS_0:
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CK0_N" "MPFS_DISCOVERY_KIT_MSS_0:CK0_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CKE0" "MPFS_DISCOVERY_KIT_MSS_0:CKE0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CS0_N" "MPFS_DISCOVERY_KIT_MSS_0:CS0_N" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"EMMC_SD_CLK_F2M" "MPFS_DISCOVERY_KIT_MSS_0:EMMC_SD_CLK_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_0_ACLK" "MPFS_DISCOVERY_KIT_MSS_0:FIC_0_ACLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_1_ACLK" "MPFS_DISCOVERY_KIT_MSS_0:FIC_1_ACLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_2_ACLK" "MPFS_DISCOVERY_KIT_MSS_0:FIC_2_ACLK" }
@@ -785,6 +781,10 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA" "I2C_0_SDA_BIBUF:PAD
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA_BIBUF:E" "MPFS_DISCOVERY_KIT_MSS_0:I2C_0_SDA_OE_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"I2C_0_SDA_BIBUF:Y" "MPFS_DISCOVERY_KIT_MSS_0:I2C_0_SDA_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_0_MDC" "MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDC_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MDIO:D" "MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDO_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MDIO:E" "MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDO_OE_M2F" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MDIO:PAD" "MDIO_PAD" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MDIO:Y" "MPFS_DISCOVERY_KIT_MSS_0:MAC_0_MDI_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_RXD_F2M" "MPFS_DISCOVERY_KIT_MSS_0:MMUART_0_RXD_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_0_TXD_M2F" "MPFS_DISCOVERY_KIT_MSS_0:MMUART_0_TXD_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_1_RXD" "MPFS_DISCOVERY_KIT_MSS_0:MMUART_1_RXD" }
@@ -853,7 +853,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_APB_INITIATOR" "MPFS_DISC
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
-# Save the smartDesign
+# Save the SmartDesign 
 save_smartdesign -sd_name ${sd_name}
-# Generate SmartDesign MSS_WRAPPER
+# Generate SmartDesign "MSS_WRAPPER"
 generate_component -component_name ${sd_name}

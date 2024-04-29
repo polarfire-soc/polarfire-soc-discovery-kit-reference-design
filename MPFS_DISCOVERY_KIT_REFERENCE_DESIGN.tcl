@@ -225,6 +225,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			-tool {PLACEROUTE} \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BANK_SETTINGS.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
+			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_MAC.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_mikroBUS.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_RPi.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_UARTS.pdc" \

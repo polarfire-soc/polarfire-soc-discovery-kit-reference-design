@@ -1,4 +1,4 @@
-# Creating SmartDesign MPFS_DISCOVERY_KIT
+# Creating SmartDesign "MPFS_DISCOVERY_KIT"
 set sd_name {MPFS_DISCOVERY_KIT}
 create_smartdesign -sd_name ${sd_name}
 
@@ -48,6 +48,7 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {LED4} -port_direction {OUT
 sd_create_scalar_port -sd_name ${sd_name} -port_name {LED5} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {LED6} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {LED7} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {MAC_0_MDC} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_AN} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_PWM} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_RST} -port_direction {OUT}
@@ -71,13 +72,15 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {SPISCLKO} -port_direction 
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SPISDO} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SPISS} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SPI_1_DO} -port_direction {OUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {VSC_RESETN} -port_direction {OUT}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {VSC_TXDIS_SRESETN} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {WE_N} -port_direction {OUT} -port_is_pad {1}
-
 
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSCL} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CLK} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CS} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {MDIO_PAD} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO12} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO13} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RPI_GPIO16} -port_direction {INOUT} -port_is_pad {1}
@@ -125,6 +128,8 @@ sd_invert_pins -sd_name ${sd_name} -pin_names {DIP8}
 sd_invert_pins -sd_name ${sd_name} -pin_names {SWITCH1}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {MBUS_AN} -value {VCC}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {MBUS_RST} -value {VCC}
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {VSC_RESETN} -value {VCC}
+sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {VSC_TXDIS_SRESETN} -value {VCC}
 # Add CLOCKS_AND_RESETS_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {CLOCKS_AND_RESETS} -instance_name {CLOCKS_AND_RESETS_0}
 
@@ -151,7 +156,6 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {FIC_3_PERIPHERALS_0:PLL0_SW_
 # Add MSS_WRAPPER_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {MSS_WRAPPER} -instance_name {MSS_WRAPPER_0}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {MSS_WRAPPER_0:MSS_INT_F2M} -pin_slices {[0:0]}
-sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {MSS_WRAPPER_0:MSS_INT_F2M[0:0]} -value {GND}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {MSS_WRAPPER_0:MSS_INT_F2M} -pin_slices {[10:10]}
 sd_create_pin_slices -sd_name ${sd_name} -pin_name {MSS_WRAPPER_0:MSS_INT_F2M} -pin_slices {[11:11]}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {MSS_WRAPPER_0:MSS_INT_F2M[11:11]} -value {GND}
@@ -235,15 +239,12 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:FIC_0_CLK" 
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:FIC_1_CLK" "MSS_WRAPPER_0:FIC_1_ACLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:FIC_2_CLK" "MSS_WRAPPER_0:FIC_2_ACLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:FIC_3_CLK" "FIC_3_PERIPHERALS_0:PCLK" "MSS_WRAPPER_0:FIC_3_PCLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MMC_CLK_200MHz" "MSS_WRAPPER_0:EMMC_SD_CLK_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MSS_DLL_LOCKS" "MSS_WRAPPER_0:MSS_DLL_LOCKS" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MSS_PLL_LOCKS" "MSS_WRAPPER_0:MSS_PLL_LOCKS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MSS_RESETN" "MSS_WRAPPER_0:MSS_RESET_N_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:MSS_TO_FABRIC_RESETN" "MSS_WRAPPER_0:MSS_RESET_N_M2F" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:REF_CLK_50MHz" "REF_CLK_50MHz" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:RESETN_FIC_0_CLK" "FIC_0_PERIPHERALS_0:ARESETN" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CLOCKS_AND_RESETS_0:RESETN_FIC_3_CLK" "FIC_3_PERIPHERALS_0:PRESETN" }
-
 sd_connect_pins -sd_name ${sd_name} -pin_names {"CS0_N" "MSS_WRAPPER_0:CS0_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP1" "MSS_WRAPPER_0:MSS_INT_F2M[6:6]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DIP2" "MSS_WRAPPER_0:MSS_INT_F2M[7:7]" }
@@ -286,12 +287,14 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"LED4" "OR2_LED4:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED5" "OR2_LED5:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED6" "OR2_LED6:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED7" "OR2_LED7:Y" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_0_MDC" "MSS_WRAPPER_0:MAC_0_MDC" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2CSCL" "MSS_WRAPPER_0:I2C_0_SCL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2CSDA" "MSS_WRAPPER_0:I2C_0_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_CLK" "MSS_WRAPPER_0:SPI_0_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_CS" "MSS_WRAPPER_0:SPI_0_SS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_MISO" "MSS_WRAPPER_0:SPI_0_DI_F2M" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_MOSI" "MSS_WRAPPER_0:SPI_0_DO" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MDIO_PAD" "MSS_WRAPPER_0:MDIO_PAD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_1_RXD" "MSS_WRAPPER_0:MMUART_1_RXD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_1_TXD" "MSS_WRAPPER_0:MMUART_1_TXD" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MMUART_4_RXD" "MSS_WRAPPER_0:MMUART_4_RXD" }
@@ -369,7 +372,7 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:APB_MMASTER
 
 # Re-enable auto promotion of pins of type 'pad'
 auto_promote_pad_pins -promote_all 1
-# Save the smartDesign
+# Save the SmartDesign 
 save_smartdesign -sd_name ${sd_name}
-# Generate SmartDesign MPFS_DISCOVERY_KIT
+# Generate SmartDesign "MPFS_DISCOVERY_KIT"
 generate_component -component_name ${sd_name}

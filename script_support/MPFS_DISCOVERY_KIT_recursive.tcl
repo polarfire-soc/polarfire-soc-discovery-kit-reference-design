@@ -12,7 +12,6 @@ source components/MIV_IHCC.tcl
 build_design_hierarchy
 
 #Sourcing the Tcl files for creating individual components under the top level
-source components/CCC_MSS_PERIPHERALS.tcl 
 source components/CORERESET.tcl 
 source components/INIT_MONITOR.tcl 
 source components/PF_CCC_C0.tcl 

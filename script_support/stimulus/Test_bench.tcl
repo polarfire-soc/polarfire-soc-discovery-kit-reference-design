@@ -70,6 +70,7 @@ sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SD_WP} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_RX0_P} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_RX0_N} -value {GND} 
+sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:MDIO_PAD} -value {GND} 
 
 # Mark outputs unused
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:WE_N} 
@@ -119,6 +120,7 @@ sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:DM}
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:BA} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:DQS} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:DQS_N} 
+sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MAC_0_MDC} 
 
 # Generate smart design
 generate_component -component_name ${sd_tb_name} -recursive 0 
