@@ -286,7 +286,7 @@ Once the script has completed the design can be configured further if needed and
 <a name="board-configuration"></a>
 ## Board configuration
 
-For Discovery Kit jumper configurations used by this design and Linux images for eMMC and SD Cards see the [MPFS Discovery Kit User Guide](https://mi-v-ecosystem.github.io/redirects/updating-Discovery-kit_updating-Discovery-kit-design-and-linux).
+For Discovery Kit jumper configurations used by this design and Linux images for eMMC and SD Cards see the [MPFS Discovery Kit User Guide](https://mi-v-ecosystem.github.io/redirects/boards-mpfs-discovery-kit-user-guide).
 
 <a name="mss-configuration"></a>
 ## MSS Configuration
