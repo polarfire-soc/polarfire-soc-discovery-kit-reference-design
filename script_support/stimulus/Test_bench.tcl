@@ -67,7 +67,6 @@ sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SD_CD} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SWITCH1} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SPI_1_DI} -value {GND} 
-sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SD_WP} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_RX0_P} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_RX0_N} -value {GND} 
 sd_connect_pins_to_constant -sd_name {Test_bench} -pin_names {MPFS_DISCOVERY_KIT_0:MDIO_PAD} -value {GND} 
@@ -95,7 +94,6 @@ sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SD_V
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SD_VOLT_CMD_DIR} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MMUART_4_TXD} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_TX0_P} 
-sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SD_POW} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MMUART_1_TXD} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:CKE0} 
 sd_mark_pins_unused -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SGMII_TX0_N} 

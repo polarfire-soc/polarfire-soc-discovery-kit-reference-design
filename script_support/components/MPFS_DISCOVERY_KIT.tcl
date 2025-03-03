@@ -23,7 +23,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {REFCLK_N} -port_direction 
 sd_create_scalar_port -sd_name ${sd_name} -port_name {REFCLK} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {REF_CLK_50MHz} -port_direction {IN}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_CD} -port_direction {IN} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_WP} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SGMII_RX0_N} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SGMII_RX0_P} -port_direction {IN} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SPI_1_DI} -port_direction {IN} -port_is_pad {1}
@@ -60,7 +59,6 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {ODT0} -port_direction {OUT
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RAS_N} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {RESET_N} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_CLK} -port_direction {OUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_POW} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_VOLT_CMD_DIR} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_VOLT_DIR_0} -port_direction {OUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {SD_VOLT_DIR_1_3} -port_direction {OUT} -port_is_pad {1}
@@ -339,13 +337,11 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_DATA0" "SD_DAT
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_DATA1" "SD_DATA1" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_DATA2" "SD_DATA2" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_DATA3" "SD_DATA3" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_POW" "SD_POW" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_VOLT_CMD_DIR" "SD_VOLT_CMD_DIR" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_VOLT_DIR_0" "SD_VOLT_DIR_0" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_VOLT_DIR_1_3" "SD_VOLT_DIR_1_3" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_VOLT_EN" "SD_VOLT_EN" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_VOLT_SEL" "SD_VOLT_SEL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SD_WP" "SD_WP" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SGMII_RX0_N" "SGMII_RX0_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SGMII_RX0_P" "SGMII_RX0_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MSS_WRAPPER_0:SGMII_TX0_N" "SGMII_TX0_N" }
