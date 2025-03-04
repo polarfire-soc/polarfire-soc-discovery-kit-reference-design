@@ -11,7 +11,7 @@ import_files \
 
 open_smartdesign -sd_name {FIC_0_PERIPHERALS} 
 sd_update_instance -sd_name {FIC_0_PERIPHERALS} -instance_name {DMA_CONTROLLER} 
-update_component_version -component_name {DMA_CONTROLLER} -new_version {2.1.102} -download_core 
+update_component_version -component_name {DMA_CONTROLLER} -new_version {2.2.107} -download_core 
 
 puts " =============updated DMA controller to latest version"
 

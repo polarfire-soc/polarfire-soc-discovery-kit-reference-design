@@ -2,7 +2,7 @@
 # Family: PolarFireSoC
 # Part Number: MPFS095T-1FCSG325I
 # Create and Configure the core component COREFFT_C0
-create_and_configure_core -core_vlnv {Actel:DirectCore:COREFFT:8.0.107} -component_name {COREFFT_C0} -params {\
+create_and_configure_core -core_vlnv {Actel:DirectCore:COREFFT:8.1.100} -component_name {COREFFT_C0} -params {\
 "AXI4S_IN_DATA:24"  \
 "AXI4S_OUT_DATA:24"  \
 "CFG_ARCH:1"  \

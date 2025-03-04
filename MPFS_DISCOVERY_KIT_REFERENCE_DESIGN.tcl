@@ -158,7 +158,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:SgCore:PF_TX_PLL:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_XCVR_REF_CLK:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:DirectCore:CoreAPB3:4.2.100} -location {www.microchip-ip.com/repositories/DirectCore}
-		download_core -vlnv {Actel:DirectCore:COREAXI4DMACONTROLLER:2.0.100} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAXI4DMACONTROLLER:2.2.107} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:DirectCore:CoreGPIO:3.2.102} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:SystemBuilder:PF_SRAM_AHBL_AXI:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:Simulation:CLK_GEN:*} -location {www.microchip-ip.com/repositories/SgCore}
@@ -173,10 +173,10 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:DirectCore:CoreAHBLite:6.1.101} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Microsemi:MiV:MIV_RV32:3.1.200} -location {www.microchip-ip.com/repositories/DirectCore} 
         download_core -vlnv {Actel:SystemBuilder:MIV_ESS:2.0.200} -location {www.microchip-ip.com/repositories/SgCore}  
-		download_core -vlnv {Actel:SystemBuilder:PF_DDR3:2.4.122} -location {www.microchip-ip.com/repositories/SgCore}
+		download_core -vlnv {Actel:SystemBuilder:PF_DDR3:2.4.124} -location {www.microchip-ip.com/repositories/SgCore}
         download_core -vlnv {Actel:DirectCore:CORESPI:5.2.104} -location {www.microchip-ip.com/repositories/SgCore} 
 		download_core -vlnv {Actel:DirectCore:COREUART:5.7.100} -location {www.microchip-ip.com/repositories/DirectCore}
-		download_core -vlnv {Actel:DirectCore:COREFFT:8.0.107} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREFFT:8.1.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:DirectCore:COREFIR_PF:3.0.121} -location {www.microchip-ip.com/repositories/DirectCore}
 	} on error err {
 		puts "Downloading cores failed, the script will continute but will fail if all of the required cores aren't present in the vault."
