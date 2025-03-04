@@ -74,8 +74,8 @@ sd_create_scalar_port -sd_name ${sd_name} -port_name {VSC_RESETN} -port_directio
 sd_create_scalar_port -sd_name ${sd_name} -port_name {VSC_TXDIS_SRESETN} -port_direction {OUT}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {WE_N} -port_direction {OUT} -port_is_pad {1}
 
-sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSCL} -port_direction {INOUT} -port_is_pad {1}
-sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2CSDA} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2C_SCL} -port_direction {INOUT} -port_is_pad {1}
+sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_I2C_SDA} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CLK} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MBUS_SPI_CS} -port_direction {INOUT} -port_is_pad {1}
 sd_create_scalar_port -sd_name ${sd_name} -port_name {MDIO_PAD} -port_direction {INOUT} -port_is_pad {1}
@@ -286,8 +286,8 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"LED5" "OR2_LED5:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED6" "OR2_LED6:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LED7" "OR2_LED7:Y" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MAC_0_MDC" "MSS_WRAPPER_0:MAC_0_MDC" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2CSCL" "MSS_WRAPPER_0:I2C_0_SCL" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2CSDA" "MSS_WRAPPER_0:I2C_0_SDA" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2C_SCL" "MSS_WRAPPER_0:I2C_0_SCL" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_I2C_SDA" "MSS_WRAPPER_0:I2C_0_SDA" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_CLK" "MSS_WRAPPER_0:SPI_0_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_CS" "MSS_WRAPPER_0:SPI_0_SS" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"MBUS_SPI_MISO" "MSS_WRAPPER_0:SPI_0_DI_F2M" }

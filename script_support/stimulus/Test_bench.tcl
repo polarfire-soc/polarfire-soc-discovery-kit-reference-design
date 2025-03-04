@@ -21,9 +21,9 @@ sd_invert_pins -sd_name ${sd_tb_name} -pin_names {"MPFS_DISCOVERY_KIT_0:REFCLK_N
 
 # Tie off pins
 sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_SPI_CS} -value {GND} 
-sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_I2CSCL} -value {GND} 
+sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_I2C_SCL} -value {GND} 
 sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_SPI_CLK} -value {GND} 
-sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_I2CSDA} -value {GND} 
+sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:MBUS_I2C_SDA} -value {GND} 
 sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:RPI_I2C_SCL} -value {GND} 
 sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:RPI_I2C_SDA} -value {GND} 
 sd_connect_pins_to_constant -sd_name ${sd_tb_name} -pin_names {MPFS_DISCOVERY_KIT_0:SPI_1_SS0} -value {GND} 

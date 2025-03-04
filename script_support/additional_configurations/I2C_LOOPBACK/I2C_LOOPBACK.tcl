@@ -136,5 +136,6 @@ organize_tool_files \
 	-file "${project_dir}/constraint/io/MPFS_DISCOVERY_KIT_BOARD_MISC.pdc" \
 	-file "${project_dir}/constraint/io/MPFS_DISCOVERY_UARTS.pdc" \
 	-file "${project_dir}/constraint/io/MPFS_DISCOVERY_7_SEG.pdc" \
+	-file "${project_dir}/constraint/io/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" \
 	-module {MPFS_DISCOVERY_KIT::work} \
 	-input_type {constraint}   

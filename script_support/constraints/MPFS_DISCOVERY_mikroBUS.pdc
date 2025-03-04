@@ -58,13 +58,13 @@ set_io -port_name MBUS_UART_TXD \
     -io_std LVCMOS33 \
     -DIRECTION INPUT
     
-set_io -port_name MBUS_I2CSCL \
+set_io -port_name MBUS_I2C_SCL \
     -pin_name D11 \
     -fixed true \
     -io_std LVCMOS33 \
     -DIRECTION INOUT
     
-set_io -port_name MBUS_I2CSDA \
+set_io -port_name MBUS_I2C_SDA \
     -pin_name D12 \
     -fixed true \
     -io_std LVCMOS33 \
