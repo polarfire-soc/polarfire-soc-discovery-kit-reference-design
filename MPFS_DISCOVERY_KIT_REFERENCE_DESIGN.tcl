@@ -202,7 +202,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		#
 
 		cd ./script_support/
-		source MPFS_DISCOVERY_KIT_recursive.tcl
+		safe_source MPFS_DISCOVERY_KIT_recursive.tcl
 		cd ../
 		set_root -module {MPFS_DISCOVERY_KIT::work} 
 
@@ -246,14 +246,14 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		#
 
 		if {[info exists BFM_SIMULATION]} {
-			source script_support/stimulus/Test_bench.tcl
+			safe_source script_support/stimulus/Test_bench.tcl
 		}
 
 		if {[info exists AXI4_STREAM_DEMO]} {
 			if {[info exists BFM_SIMULATION]} {
-				source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR_BFM.tcl    
+				safe_source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR_BFM.tcl    
 			} else {
-				source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR.tcl    
+				safe_source script_support/additional_configurations/AXI4_STREAM_DATA_GENERATOR/AXI4_STREAM_DATA_GENERATOR.tcl    
 			}
 		}
 
@@ -265,9 +265,9 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			create_config $local_dir/script_support/components/MSS/MPFS_DISCOVERY_KIT_MSS.cfg $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg
 			update_param $local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg "I2C_1 " "FABRIC"
 			exec $mss_config_loc -GENERATE -CONFIGURATION_FILE:$local_dir/script_support/additional_configurations/I2C_LOOPBACK/DISCOVERY_MSS_I2C_LOOPBACK.cfg -OUTPUT_DIR:$local_dir/script_support/components/MSS_I2C_LOOPBACK
-			source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
+			safe_source ./script_support/additional_configurations/I2C_LOOPBACK/I2C_LOOPBACK.tcl
 		} elseif {[info exists VECTORBLOX]} {
-			source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
+			safe_source ./script_support/additional_configurations/Vectorblox/Vectorblox.tcl
 		}
 		
 		#
@@ -306,13 +306,13 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		if {[info exists SMARTHLS]} {
 			if {$isNewProject} {
 				# Prepare the SmartDesign for HLS integration 
-				source ./script_support/additional_configurations/smarthls/pre_hls_integration.tcl
+				safe_source ./script_support/additional_configurations/smarthls/pre_hls_integration.tcl
 			}
 
 			# If the SmartHLS variable points to a valid SmartHLS project directory, then compile it.
 			# Otherwise, HLS modules can be added later.
 			if {[file isdirectory $SMARTHLS]} {
-				source ./script_support/additional_configurations/smarthls/compile_and_integrate_shls_to_refdesign.tcl
+				safe_source ./script_support/additional_configurations/smarthls/compile_and_integrate_shls_to_refdesign.tcl
 			}
 		}
 		
@@ -325,7 +325,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 
 	} elseif {[info exists MIV_RV32_CFG1]} {
 		cd ./script_support/additional_configurations/RV32/CFG1/BaseDesign/
-		source BaseDesign_recursive.tcl
+		safe_source BaseDesign_recursive.tcl
 		set_root -module {BaseDesign::work} 
 		
 		build_design_hierarchy
@@ -371,7 +371,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 
 	} elseif {[info exists MIV_RV32_CFG2]} {
 		cd ./script_support/additional_configurations/RV32/CFG2/BaseDesign/
-		source BaseDesign_recursive.tcl
+		safe_source BaseDesign_recursive.tcl
 		set_root -module {BaseDesign::work} 
 		
 		build_design_hierarchy
@@ -417,7 +417,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 
 	} elseif {[info exists MIV_RV32_CFG3]} {
 		cd ./script_support/additional_configurations/RV32/CFG3/BaseDesign/
-		source BaseDesign_recursive.tcl
+		safe_source BaseDesign_recursive.tcl
 		set_root -module {BaseDesign::work} 
 		
 		build_design_hierarchy
@@ -463,7 +463,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		
 	} elseif {[info exists FIR_DEMO]} {
 		cd ./script_support/additional_configurations/FIR_demo/top/
-		source top_recursive.tcl
+		safe_source top_recursive.tcl
 		set_root -module {top::work} 
 		
 		build_design_hierarchy
