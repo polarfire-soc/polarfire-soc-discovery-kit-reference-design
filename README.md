@@ -135,10 +135,6 @@ The diagram below outlines the top level configuration of the FPGA fabric and sh
 
 ![Block diagram](./diagrams/block_diagram.svg)
 
-The diagram below shows the Inter Hart Communication (IHC) subsystem configuration used in the reference design:
-
-![IHC subsystem block diagram](./diagrams/IHC_SUBSYSTEM_block_diagram.svg)
-
 <a name="mss-peripherals"></a>
 ### MSS peripherals
 
@@ -176,31 +172,7 @@ The Discovery Kit has 1GB of DDR4 on board connected to the MSS DDR Controller. 
 | MSS: FIC3      | FIC_3_ADDRESS_GENERATION   | CoreI2C                     | N/A                     | 10  (RPI header)             | 0x4000_0200 -> 0x4000_02FF       |
 | MSS: FIC3      | FIC_3_ADDRESS_GENERATION   | CoreUART                    | N/A                     | J6 (mikroBUS socket)         | 0x4000_0300 -> 0x4000_03FF       |
 | MSS: FIC3      | FIC_3_ADDRESS_GENERATION   | SPI_FOR_7_SEG               | N/A                     | J48 (7 seg display adapter)  | 0x4000_0400 -> 0x4000_04FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_1:A      | N/A                     | N/A                          | 0x5000_0000 -> 0x5000_00FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_2:A      | N/A                     | N/A                          | 0x5000_0100 -> 0x5000_01FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_3:A      | N/A                     | N/A                          | 0x5000_0200 -> 0x5000_02FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_4:A      | N/A                     | N/A                          | 0x5000_0300 -> 0x5000_03FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | E51_IRQ_AGGREGATOR          | N/A                     | N/A                          | 0x5000_0400 -> 0x5000_04FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_1:B      | N/A                     | N/A                          | 0x5000_0500 -> 0x5000_05FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_2:A    | N/A                     | N/A                          | 0x5000_0600 -> 0x5000_06FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_3:A    | N/A                     | N/A                          | 0x5000_0700 -> 0x5000_07FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_4:A    | N/A                     | N/A                          | 0x5000_0800 -> 0x5000_08FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | U54_1_IRQ_AGGREGATOR        | N/A                     | N/A                          | 0x5000_0900 -> 0x5000_09FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_2:B      | N/A                     | N/A                          | 0x5000_0A00 -> 0x5000_0AFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_2:B    | N/A                     | N/A                          | 0x5000_0B00 -> 0x5000_0BFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_2_TO_U54_3:A    | N/A                     | N/A                          | 0x5000_0C00 -> 0x5000_0CFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_2_TO_U54_4:A    | N/A                     | N/A                          | 0x5000_0D00 -> 0x5000_0DFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | U54_2_IRQ_AGGREGATOR        | N/A                     | N/A                          | 0x5000_0E00 -> 0x5000_0EFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_3:B      | N/A                     | N/A                          | 0x5000_0F00 -> 0x5000_0FFF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_3:B    | N/A                     | N/A                          | 0x5000_1000 -> 0x5000_10FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_2_TO_U54_3:B    | N/A                     | N/A                          | 0x5000_1100 -> 0x5000_11FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_3_TO_U54_4:A    | N/A                     | N/A                          | 0x5000_1200 -> 0x5000_12FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | U54_3_IRQ_AGGREGATOR        | N/A                     | N/A                          | 0x5000_1300 -> 0x5000_13FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_E51_TO_U54_4:B      | N/A                     | N/A                          | 0x5000_1400 -> 0x5000_14FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_1_TO_U54_4:B    | N/A                     | N/A                          | 0x5000_1500 -> 0x5000_15FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_2_TO_U54_4:B    | N/A                     | N/A                          | 0x5000_1600 -> 0x5000_16FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | CHANNEL_U54_3_TO_U54_4:B    | N/A                     | N/A                          | 0x5000_1700 -> 0x5000_17FF       |
-| MSS: FIC3      | IHC_SUBSYSTEM: APB3mmaster | U54_4_IRQ_AGGREGATOR        | N/A                     | N/A                          | 0x5000_1800 -> 0x5000_18FF       |
+| MSS: FIC3      | FIC_3_ADDRESS_GENERATION   | MIV_IHC                     | N/A                     | N/A                          | 0x5000_0000 -> 0x500F_FFFF       |
 | DMA_CONTROLLER | DMA_INITIATOR              | MSS: FIC0                   | N/A                     | N/A                          | 0x0000_0000 -> 0xFFFF_FFFF       |
 
 <a name="interrupt-map"></a>
@@ -221,11 +193,11 @@ The Discovery Kit has 1GB of DDR4 on board connected to the MSS DDR Controller. 
 | CoreUARTapb_PARITY_ERR  | MSS_INT_F2M[13]    |
 | CoreUARTapb_OVERFLOW    | MSS_INT_F2M[14]    |
 | CoreUARTapb_FRAMING_ERR | MSS_INT_F2M[15]    |
-| IHC_SUBSYSTEM:E51_IRQ   | MSS_INT_F2M[63]    |
-| IHC_SUBSYSTEM:U54_1_IRQ | MSS_INT_F2M[62]    |
-| IHC_SUBSYSTEM:U54_2_IRQ | MSS_INT_F2M[61]    |
-| IHC_SUBSYSTEM:U54_3_IRQ | MSS_INT_F2M[60]    |
-| IHC_SUBSYSTEM:U54_4_IRQ | MSS_INT_F2M[59]    |
+| MIV_IHC:E51_IRQ         | MSS_INT_F2M[63]    |
+| MIV_IHC:U54_1_IRQ       | MSS_INT_F2M[62]    |
+| MIV_IHC:U54_2_IRQ       | MSS_INT_F2M[61]    |
+| MIV_IHC:U54_3_IRQ       | MSS_INT_F2M[60]    |
+| MIV_IHC:U54_4_IRQ       | MSS_INT_F2M[59]    |
 
 <a name="gpio1-connections"></a>
 ### GPIO1 connections

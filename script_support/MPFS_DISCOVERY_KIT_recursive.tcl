@@ -7,8 +7,6 @@ build_design_hierarchy
 #Sourcing the Tcl files in which HDL+ core definitions are created for HDL modules
 source components/APB_ARBITER.tcl 
 source components/APB_PASS_THROUGH.tcl 
-source components/MIV_IHCIA.tcl 
-source components/MIV_IHCC.tcl 
 build_design_hierarchy
 
 #Sourcing the Tcl files for creating individual components under the top level
@@ -28,8 +26,7 @@ source components/FIC_3_0x4000_0xxx.tcl
 source components/FIC_3_0x4xxx_xxxx.tcl 
 source components/FIC_3_ADDRESS_GENERATION.tcl 
 source components/GPIO.tcl 
-source components/IHC_APB.tcl 
-source components/IHC_SUBSYSTEM.tcl 
+source components/MIV_IHC_C0.tcl
 source components/RECONFIGURATION_INTERFACE.tcl 
 source components/SPI_FOR_7_SEG.tcl 
 source components/corepwm_C0.tcl 

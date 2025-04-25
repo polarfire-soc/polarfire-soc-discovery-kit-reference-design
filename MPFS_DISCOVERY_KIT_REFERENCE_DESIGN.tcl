@@ -178,6 +178,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:DirectCore:COREUART:5.7.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:DirectCore:COREFFT:8.1.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:DirectCore:COREFIR_PF:3.0.121} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Microchip:MiV:MIV_IHC:2.0.100} -location {www.microchip-ip.com/repositories/DirectCore}
 	} on error err {
 		puts "Downloading cores failed, the script will continute but will fail if all of the required cores aren't present in the vault."
 	}
@@ -290,8 +291,6 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		save_smartdesign -sd_name {CORE_I2C_C0_0_WRAPPER}
 		sd_reset_layout -sd_name {FIC_3_ADDRESS_GENERATION}
 		save_smartdesign -sd_name {FIC_3_ADDRESS_GENERATION}
-		sd_reset_layout -sd_name {IHC_SUBSYSTEM}
-		save_smartdesign -sd_name {IHC_SUBSYSTEM}
 		sd_reset_layout -sd_name {FIC_3_PERIPHERALS}
 		save_smartdesign -sd_name {FIC_3_PERIPHERALS}
 		sd_reset_layout -sd_name {MSS_WRAPPER}

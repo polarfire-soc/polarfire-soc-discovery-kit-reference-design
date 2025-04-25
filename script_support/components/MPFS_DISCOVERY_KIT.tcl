@@ -269,11 +269,11 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:GPIO_OUT[3:
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:GPIO_OUT[4:4]" "OR2_LED5:A" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:GPIO_OUT[5:5]" "OR2_LED6:A" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:GPIO_OUT[6:6]" "OR2_LED7:A" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_SUBSYSTEM_E51_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[63:63]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_SUBSYSTEM_U54_1_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[62:62]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_SUBSYSTEM_U54_2_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[61:61]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_SUBSYSTEM_U54_3_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[60:60]" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_SUBSYSTEM_U54_4_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[59:59]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_MP_APP_E51_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[63:63]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_MP_APP_U54_1_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[62:62]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_MP_APP_U54_2_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[61:61]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_MP_APP_U54_3_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[60:60]" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:IHC_MP_APP_U54_4_IRQ" "MSS_WRAPPER_0:MSS_INT_F2M[59:59]" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:PWM_0" "MBUS_PWM" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:SPISCLKO" "SPISCLKO" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"FIC_3_PERIPHERALS_0:SPISDO" "SPISDO" }
