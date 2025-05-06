@@ -19,6 +19,7 @@
     - [GPIO1 connections](#gpio1-connections)
     - [GPIO2 connections](#gpio2-connections)
     - [CoreGPIO connections](#coregpio-connections)
+    - [PLL Placements](#pll-placements)
   - [Programming the FPGA](#programming-the-fpga)
   - [Board configuration](#board-configuration)
   - [MSS Configuration](#mss-configuration)
@@ -277,6 +278,13 @@ The Discovery Kit has 1GB of DDR4 on board connected to the MSS DDR Controller. 
 | 4   | Out       | LED5          | OR'd with GPIO2 |
 | 5   | Out       | LED6          | OR'd with GPIO2 |
 | 6   | Out       | LED7          | OR'd with GPIO2 |
+
+
+<a name="pll-placements"></a>
+### PLL Placements
+
+The CCC PLL is currently locked to the south-west corner of the chip. It is strongly recommended not to change this placement as doing so may break compatibility 
+with the dts files located in the [linux4microchip repository](https://github.com/linux4microchip/linux/tree/linux-6.6-mchp/arch/riscv/boot/dts/microchip).
 
 <a name="programming-the-fpga"></a>
 ## Programming the FPGA

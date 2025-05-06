@@ -219,7 +219,8 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			-io_pdc "${constraint_path}/MPFS_DISCOVERY_RPi.pdc" \
 			-io_pdc "${constraint_path}/MPFS_DISCOVERY_UARTS.pdc" \
 			-io_pdc "${constraint_path}/MPFS_DISCOVERY_7_SEG.pdc" \
-			-io_pdc "${constraint_path}/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" 
+			-io_pdc "${constraint_path}/MPFS_DISCOVERY_I2C_LOOPBACK.pdc" \
+			-fp_pdc "${constraint_path}/SW_PLL.pdc"  
 		
 		organize_tool_files \
 			-tool {PLACEROUTE} \
@@ -230,6 +231,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_RPi.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_UARTS.pdc" \
 			-file "${project_dir}/constraint/io/MPFS_DISCOVERY_7_SEG.pdc" \
+			-file "${project_dir}/constraint/fp/SW_PLL.pdc" \
 			-module {MPFS_DISCOVERY_KIT::work} \
 			-input_type {constraint}        
 			
