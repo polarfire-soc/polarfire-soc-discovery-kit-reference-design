@@ -217,6 +217,11 @@ The Discovery Kit has 1GB of DDR4 on board connected to the MSS DDR Controller. 
 | DIP SW3                 | MSS_INT_F2M[8]     |
 | DIP SW4                 | MSS_INT_F2M[9]     |
 | SWITCH 1                | MSS_INT_F2M[10]    |
+| CoreUARTapb_RXRDY       | MSS_INT_F2M[11]    |
+| CoreUARTapb_TXRDY       | MSS_INT_F2M[12]    |
+| CoreUARTapb_PARITY_ERR  | MSS_INT_F2M[13]    |
+| CoreUARTapb_OVERFLOW    | MSS_INT_F2M[14]    |
+| CoreUARTapb_FRAMING_ERR | MSS_INT_F2M[15]    |
 | IHC_SUBSYSTEM:E51_IRQ   | MSS_INT_F2M[63]    |
 | IHC_SUBSYSTEM:U54_1_IRQ | MSS_INT_F2M[62]    |
 | IHC_SUBSYSTEM:U54_2_IRQ | MSS_INT_F2M[61]    |
