@@ -150,7 +150,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:SgCore:PF_CCC:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:DirectCore:CORERESET_PF:*} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:*} -location {www.microchip-ip.com/repositories/SgCore}
-		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:SgCore:PF_CLK_DIV:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_DRI:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_NGMUX:*} -location {www.microchip-ip.com/repositories/SgCore}
@@ -521,9 +521,9 @@ configure_tool -name {PLACEROUTE} -params {DELAY_ANALYSIS:MAX} -params {EFFORT_L
 
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
-} elseif {[info exists PLACEROUTE]} {
+} if {[info exists PLACEROUTE]} {
     run_tool -name {PLACEROUTE}
-} elseif {[info exists VERIFY_TIMING]} {
+} if {[info exists VERIFY_TIMING]} {
     run_tool -name {VERIFYTIMING}
 }
 
