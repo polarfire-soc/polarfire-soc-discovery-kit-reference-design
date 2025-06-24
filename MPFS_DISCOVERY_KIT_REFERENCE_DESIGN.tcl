@@ -521,9 +521,13 @@ configure_tool -name {PLACEROUTE} -params {DELAY_ANALYSIS:MAX} -params {EFFORT_L
 
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
-} if {[info exists PLACEROUTE]} {
+} 
+
+if {[info exists PLACEROUTE]} {
     run_tool -name {PLACEROUTE}
-} if {[info exists VERIFY_TIMING]} {
+} 
+
+if {[info exists VERIFY_TIMING]} {
     run_tool -name {VERIFYTIMING}
 }
 
