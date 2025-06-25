@@ -11,11 +11,11 @@ proc getHlsPaths { } {
     } else {
         global shls_path
         if { $OS == "Linux" } {
-            set base_path [string cat [string trimright $install_loc Libero]/SmartHLS-$liberoRelease {/SmartHLS}]
+            set base_path [string cat [string trimright $install_loc Libero]/SmartHLS {/SmartHLS}]
             set ::env(PATH) [string cat $::env(PATH) ":" $base_path {/bin}]
             set shls_path [string cat $base_path {/bin/shls}]
         } else {
-            set base_path [string cat [string trimright $install_loc Designer]SmartHLS-$liberoRelease {/SmartHLS}]
+            set base_path [string cat [string trimright $install_loc Designer]../SmartHLS {/SmartHLS}]
             set base_path [file normalize $base_path]
             set drive [string range $install_loc 0 0]
             set shls_path "$base_path/bin/shls.bat"
