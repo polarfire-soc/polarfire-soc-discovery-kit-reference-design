@@ -150,7 +150,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:SgCore:PF_CCC:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:DirectCore:CORERESET_PF:*} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:*} -location {www.microchip-ip.com/repositories/SgCore}
-		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:SgCore:PF_CLK_DIV:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_DRI:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_NGMUX:*} -location {www.microchip-ip.com/repositories/SgCore}
@@ -523,18 +523,25 @@ configure_tool -name {PLACEROUTE} -params {DELAY_ANALYSIS:MAX} -params {EFFORT_L
 
 if {[info exists SYNTHESIZE]} {
     run_tool -name {SYNTHESIZE}
-} elseif {[info exists PLACEROUTE]} {
+} 
+
+if {[info exists PLACEROUTE]} {
     run_tool -name {PLACEROUTE}
-} elseif {[info exists VERIFY_TIMING]} {
+} 
+
+if {[info exists VERIFY_TIMING]} {
     run_tool -name {VERIFYTIMING}
 }
 
 if {[info exists HSS_UPDATE]} {
-    if !{[file exists "./script_support/hss-envm-wrapper.mpfs-disco-kit.hex"]} {
-        if {[catch    {exec wget https://github.com/polarfire-soc/hart-software-services/releases/latest/download/hss-envm-wrapper.mpfs-disco-kit.hex -P ./script_support/} issue]} {
-        }
+	set firmwareFile hss-envm-wrapper.mpfs-disco-kit.hex
+	set url https://github.com/polarfire-soc/hart-software-services/releases/latest/download/$firmwareFile
+    if {![file exists "./script_support/$firmwareFile"] || [file size ./script_support/$firmwareFile] == 0} {
+        if {[catch {exec curl -L $url -o ./script_support/$firmwareFile} issue]} {
+            puts $issue
+	}
     }
-    create_eNVM_config "$local_dir/script_support/components/MSS/ENVM.cfg" "$local_dir/script_support/hss-envm-wrapper.mpfs-disco-kit.hex"
+    create_eNVM_config "$local_dir/script_support/components/MSS/ENVM.cfg" "$local_dir/script_support/$firmwareFile"
     run_tool -name {GENERATEPROGRAMMINGDATA}
     configure_envm -cfg_file {script_support/components/MSS/ENVM.cfg}
 }
@@ -544,11 +551,8 @@ if {[info exists GENERATE_PROGRAMMING_DATA]} {
 }  elseif {[info exists PROGRAM]} {
     run_tool -name {PROGRAMDEVICE}
 } elseif {[info exists EXPORT_FPE]} {   
-    set gUseSPI 0
-    if {[info exists SMARTHLS]} {
-        set gUseSPI [update_snvm_to_spi_ram_cfg $project_dir/designer/MPFS_DISCOVERY_KIT/MPFS_DISCOVERY_KIT_RAM.cfg ]
-        generate_design_initialization_data
-    }
+    # Discovery Kit does not have an external SPI flash memory.
+	set gUseSPI 0
     
     set jobPath $local_dir
     if {[file isdirectory $EXPORT_FPE]} {set jobPath $EXPORT_FPE}
