@@ -164,7 +164,7 @@ if { [file exists $project_dir/$project_name.prjx] } {
 		download_core -vlnv {Actel:SgCore:PF_CCC:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:DirectCore:CORERESET_PF:*} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Microsemi:SgCore:PFSOC_INIT_MONITOR:*} -location {www.microchip-ip.com/repositories/SgCore}
-		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.8.103} -location {www.microchip-ip.com/repositories/DirectCore}
+		download_core -vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.100} -location {www.microchip-ip.com/repositories/DirectCore}
 		download_core -vlnv {Actel:SgCore:PF_CLK_DIV:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_DRI:*} -location {www.microchip-ip.com/repositories/SgCore}
 		download_core -vlnv {Actel:SgCore:PF_NGMUX:*} -location {www.microchip-ip.com/repositories/SgCore}
@@ -564,10 +564,6 @@ if {[info exists GENERATE_PROGRAMMING_DATA]} {
     run_tool -name {PROGRAMDEVICE}
 } elseif {[info exists EXPORT_FPE]} {   
     set gUseSPI 0
-    if {[info exists SMARTHLS]} {
-        set gUseSPI [update_snvm_to_spi_ram_cfg $project_dir/designer/MPFS_DISCOVERY_KIT/MPFS_DISCOVERY_KIT_RAM.cfg ]
-        generate_design_initialization_data
-    }
     
     set jobPath $local_dir
     if {[file isdirectory $EXPORT_FPE]} {set jobPath $EXPORT_FPE}

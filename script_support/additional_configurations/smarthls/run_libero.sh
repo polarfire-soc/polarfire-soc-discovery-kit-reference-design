@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Usage:
-#   cd icicle-kit-reference-design
+#   cd discovery-kit-reference-design
 #   ./script_support/additional_configurations/smarthls/run_libero.sh
 #
 set -e
@@ -22,7 +22,7 @@ rm -rf \
 # 
 target=SMARTHLS:$HLS_PATH+EXPORT_FPE:./$prjDir+HSS_UPDATE:1
 time libero \
-    script:MPFS_ICICLE_KIT_REFERENCE_DESIGN.tcl  \
+    script:MPFS_DISCOVERY_KIT_REFERENCE_DESIGN.tcl  \
     script_args:$target \
-    logfile:$prjDir/MPFS_ICICLE_KIT_REFERENCE_DESIGN.log
+    logfile:$prjDir/MPFS_DISCOVERY_KIT_REFERENCE_DESIGN.log
 
