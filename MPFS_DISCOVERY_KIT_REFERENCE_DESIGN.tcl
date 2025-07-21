@@ -48,6 +48,20 @@ set mss_config_loc "$install_loc/bin64/pfsoc_mss"
 set local_dir [pwd]
 set constraint_path ./script_support/constraints
 
+if {[info exists DESIGN_VERSION]} {
+    set design_version "$DESIGN_VERSION"
+} else {
+    set design_version "0"
+}
+puts "DESIGN_VERSION: $design_version"
+
+if {[info exists SILICON_SIGNATURE]} {
+    set silicon_signature "$SILICON_SIGNATURE"
+} else {
+    set silicon_signature "D15C0417"
+}
+puts "SILICON_SIGNATURE: $silicon_signature"
+
 if {[info exists I2C_LOOPBACK]} {
     set project_name "MPFS_DISCOVERY_I2C_LOOPBACK"
     set project_dir "$local_dir/MPFS_DISCOVERY_I2C_LOOPBACK"
@@ -512,6 +526,12 @@ if { [file exists $project_dir/$project_name.prjx] } {
 
 	}
 }	
+
+configure_tool \
+         -name {CONFIGURE_PROG_OPTIONS} \
+         -params {back_level_version:0} \
+         -params design_version:$design_version \
+         -params silicon_signature:$silicon_signature
 
 #
 # // Run the design flow and add eNVM clients if required
