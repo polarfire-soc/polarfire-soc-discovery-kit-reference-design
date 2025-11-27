@@ -81,12 +81,12 @@ set_io -port_name {LED_4}  \
 # -- UART RX/TX -- #
 
 set_io -port_name RX  \
-    -pin_name Y21     \
+    -pin_name W21     \
     -fixed true       \
     -DIRECTION INPUT
 
 set_io -port_name TX   \
-    -pin_name W21      \
+    -pin_name Y21      \
     -fixed true        \
     -DIRECTION OUTPUT
 
