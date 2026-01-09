@@ -13,7 +13,7 @@ SRCS = main_variations/main.fifo.cpp
 #-------------------------------------------------
 # Select the SoC design:
 #-------------------------------------------------
-LOCAL_CONFIG = -legup-config=config.tcl
+LOCAL_CONFIG = -shls-config=config.tcl
 
 #-------------------------------------------------
 # Additional compilation settings
