@@ -8,7 +8,7 @@
 #define N_CHANNELS 3
 #define WIDTH 1920
 #define HEIGHT 1080
-#define N_ROWS 20
+#define N_ROWS 10
 #define FILENAME "toronto.bmp"
 
 struct bmp_pixel_t {
